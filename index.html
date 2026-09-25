@@ -14,10 +14,10 @@
         rel="stylesheet">
 
     <!-- Fallback Font import if offline -->
-    <link rel="stylesheet" href="./BunkBank SEM01_files/css2" error="this.onerror=null;">
+    <link rel="stylesheet" href="./BunkBank SEM01_files/fonts.css">
 
     <!-- GSAP for Ultra-Fast Snappy Micro-Animations -->
-    <script src="./BunkBank SEM01_files/gsap.min.js.download"
+    <script src="./BunkBank SEM01_files/gsap_min.js"
         onerror="this.src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'"></script>
     <!-- PDF.js for Weekly Attendance Report Document Parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -1926,8 +1926,6 @@
                 </button>
                 <button class="btn-secondary" onclick="exportData()" style="font-size: 0.82rem; padding: 8px 13px;" title="Export JSON Backup">Export</button>
                 <button class="btn-secondary" onclick="importData()" style="font-size: 0.82rem; padding: 8px 13px;" title="Import JSON Backup">Import</button>
-                <button class="btn-secondary" onclick="resetToOfficialNMIMS()" style="font-size: 0.82rem; padding: 8px 13px;"
-                    title="Reset Official NMIMS 45/30/15 Schedule">Reset Schedule</button>
             </div>
 
             <div class="panel-divider"></div>
@@ -1995,6 +1993,8 @@
                 <div class="panel-title">
                     <span>Active Balances &amp; Modules</span>
                 </div>
+                <button class="btn-secondary" onclick="resetToOfficialNMIMS()" style="font-size: 0.82rem; padding: 8px 13px;"
+                    title="Reset Official NMIMS 45/30/15 Schedule">Reset Schedule</button>
             </div>
 
             <!-- Category Filter Tabs -->
@@ -2344,6 +2344,7 @@ EOB 8 6 75%"></textarea>
                 document.getElementById('semUnit').value = "4.34";
                 customGroup.style.display = 'none';
             } else {
+                document.getElementById('semUnit').value = "1";
                 customGroup.style.display = 'flex';
             }
             updateAll();
@@ -2599,7 +2600,7 @@ EOB 8 6 75%"></textarea>
                     recClass = 'rec-defaulter';
                     advisoryText = `⛔ Cannot reach ${reqPctNum}%. Max possible term-end attendance is <strong>${termPct}%</strong> (with 100% future attendance).`;
                 }
-            } else if (balance <= (isTwoHourLab ? 2 : 2)) {
+            } else if (balance <= 2) {
                 statusClass = 'status-tight';
                 badgeClass = 'badge-tight';
                 statusText = 'TIGHT';
@@ -3704,6 +3705,7 @@ EOB 8 6 75%"></textarea>
                 document.getElementById('semPreset').value = conf.preset;
                 onSemesterDurationChange();
                 if (conf.len) document.getElementById('semLen').value = conf.len;
+                if (conf.unit) document.getElementById('semUnit').value = conf.unit;
                 if (conf.holidays) document.getElementById('holidays').value = conf.holidays;
                 if (conf.targetPct) document.getElementById('targetPct').value = conf.targetPct;
             } else {

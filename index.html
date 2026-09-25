@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="apex">
 
 <head>
@@ -227,6 +227,12 @@
             --shadow-card-hover: 0 16px 35px rgba(255, 0, 60, 0.15);
         }
 
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -243,6 +249,9 @@
             background-attachment: fixed;
             color: var(--text-main);
             font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
             min-height: 100vh;
             padding: 24px 16px 60px 16px;
             display: flex;
@@ -583,6 +592,78 @@
             font-family: var(--font-mono);
         }
 
+        /* --- VIEW MODE TOGGLE (COMBINED VS BY TYPE) --- */
+        .view-mode-toggle {
+            display: inline-flex;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-glass);
+            padding: 3px;
+            border-radius: 30px;
+            gap: 4px;
+        }
+
+        .view-mode-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.2s var(--ease-smooth);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            user-select: none;
+        }
+
+        .view-mode-btn:hover {
+            color: var(--heading-color);
+        }
+
+        .view-mode-btn.active {
+            background: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+        }
+
+        [data-theme="apex"] .view-mode-btn.active {
+            box-shadow: 0 2px 10px rgba(255, 0, 60, 0.4);
+        }
+
+        /* Combined Course Components Breakdown List */
+        .combined-components-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .combined-component-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 0.76rem;
+            transition: border-color 0.2s;
+        }
+
+        .combined-component-pill:hover {
+            border-color: var(--border-glow);
+        }
+
+        .combined-steppers-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
         /* --- FORM CONTROLS --- */
         .form-grid {
             display: grid;
@@ -796,7 +877,7 @@
             min-height: 100px;
         }
 
-        /* CLEAN HIGH-PERFORMANCE CARD CONTAINER (ZERO LAG) */
+        /* CLEAN HIGH-PERFORMANCE CARD CONTAINER (CRYSTAL CLEAR HIGH-DPI) */
         .account-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
@@ -808,16 +889,12 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            contain: layout style;
-            transition: transform 0.3s var(--ease-apple), border-color 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
+            transition: transform 0.25s var(--ease-apple), border-color 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth);
             box-shadow: var(--shadow-card);
-            will-change: transform;
         }
 
         .account-card:hover {
-            transform: translateY(-2px) translateZ(0);
+            transform: translateY(-2px);
             border-color: rgba(99, 102, 241, 0.35);
             background: var(--bg-card-hover);
             box-shadow: var(--shadow-card-hover);
@@ -1110,39 +1187,43 @@
             background: rgba(239, 68, 68, 0.1);
         }
 
-        /* Circular Gauge Side */
+        /* High-Definition Circular Gauge */
         .card-gauge-side {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            min-width: 110px;
+            min-width: 104px;
+            flex-shrink: 0;
         }
 
         .radial-gauge {
-            width: 90px;
-            height: 90px;
+            width: 92px;
+            height: 92px;
             position: relative;
+            flex-shrink: 0;
         }
 
         .radial-gauge svg {
             width: 100%;
             height: 100%;
             transform: rotate(-90deg);
+            shape-rendering: geometricPrecision;
+            text-rendering: optimizeLegibility;
         }
 
         .gauge-bg {
             fill: none;
             stroke: var(--gauge-bg-stroke);
-            stroke-width: 7;
+            stroke-width: 14;
         }
 
         .gauge-fill {
             fill: none;
-            stroke-width: 7;
+            stroke-width: 14;
             stroke-linecap: round;
-            transition: stroke-dashoffset 0.8s var(--ease-apple), stroke 0.4s var(--ease-smooth);
+            transition: stroke-dashoffset 0.65s cubic-bezier(0.22, 1, 0.36, 1), stroke 0.35s ease;
         }
 
         .gauge-center {
@@ -1152,25 +1233,40 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 4px;
+            pointer-events: none;
         }
 
         .gauge-pct {
-            font-family: var(--font-mono);
-            font-size: 1.15rem;
-            font-weight: 700;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-feature-settings: "tnum" 1;
+            font-variant-numeric: tabular-nums;
             color: var(--heading-color);
-            line-height: 1;
+            line-height: 1.05;
+            max-width: 76px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
+            display: inline-block;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: font-size 0.2s var(--ease-smooth);
         }
 
         .gauge-subtext {
-            font-size: 0.6rem;
+            font-size: 0.58rem;
+            font-weight: 600;
             color: var(--text-dim);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 2px;
+            letter-spacing: 0.06em;
+            margin-top: 3px;
+            opacity: 0.85;
         }
 
-        
+
         /* --- WHITE THEME HIGH-CONTRAST OVERRIDES --- */
         [data-theme="white"] .recovery-banner.rec-safe {
             border-left: 3px solid #047857;
@@ -1499,6 +1595,65 @@
             max-width: 180px;
         }
 
+        /* --- NEW SUBJECT CONFIGURATION WIZARD --- */
+        .new-subjects-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .new-subject-card {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-glass);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.2s var(--ease-smooth);
+        }
+
+        .new-subject-card:hover {
+            border-color: rgba(99, 102, 241, 0.35);
+            background: var(--bg-card-hover);
+        }
+
+        .new-subject-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .new-subject-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--heading-color);
+        }
+
+        .new-subject-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .new-subject-preview-badge {
+            font-size: 0.78rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(99, 102, 241, 0.12);
+            color: var(--badge-brand-text);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            font-family: var(--font-mono);
+            font-weight: 600;
+        }
+
         /* --- API GUIDE CARDS --- */
         .api-card {
             background: var(--bg-subtle);
@@ -1663,8 +1818,18 @@
         }
 
         @keyframes pulseSparkle {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.12); opacity: 1; filter: drop-shadow(0 0 6px #06b6d4); }
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: scale(1.12);
+                opacity: 1;
+                filter: drop-shadow(0 0 6px #06b6d4);
+            }
         }
 
         .designer-label {
@@ -1812,7 +1977,8 @@
                 <div class="header-right-controls">
                     <!-- Sleek Custom Theme Dropdown -->
                     <div class="theme-select-wrap">
-                        <select id="themeSelect" class="theme-select-control" onchange="setTheme(this.value)" aria-label="Select Theme">
+                        <select id="themeSelect" class="theme-select-control" onchange="setTheme(this.value)"
+                            aria-label="Select Theme">
                             <option value="apex" selected>🏎️ Apex GT</option>
                             <option value="black">⬛ Pure Black</option>
                             <option value="midnight">🌌 Midnight</option>
@@ -1827,15 +1993,6 @@
             <p class="app-subtitle">
                 <span>Course Attendance Tracker • <strong>80% Minimum Requirement</strong></span>
             </p>
-
-            <div class="policy-banner">
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-                </svg>
-                <span><strong>Academic Term Policy:</strong> Standard semester schedule calculation. 3/wk subjects = 45 total
-                    lectures (9 bunks allowed @ 80%), 2/wk = 30 lectures (6 bunks), 1/wk = 15 sessions (3 bunks).</span>
-            </div>
 
             <!-- Dashboard Summary Metrics -->
             <div class="dash-grid">
@@ -1915,12 +2072,14 @@
                     title="Upload Official NMIMS / College Attendance PDF or Text Report">
                     📥 Upload Attendance Report (PDF / Text)
                 </button>
-                <button class="btn-secondary" onclick="openApiModal()"
-                    style="font-size: 0.82rem; padding: 8px 13px;" title="API &amp; Automated Portal Sync Information">
+                <button class="btn-secondary" onclick="openApiModal()" style="font-size: 0.82rem; padding: 8px 13px;"
+                    title="API &amp; Automated Portal Sync Information">
                     ⚡ API &amp; Sync
                 </button>
-                <button class="btn-secondary" onclick="exportData()" style="font-size: 0.82rem; padding: 8px 13px;" title="Export JSON Backup">Export</button>
-                <button class="btn-secondary" onclick="importData()" style="font-size: 0.82rem; padding: 8px 13px;" title="Import JSON Backup">Import</button>
+                <button class="btn-secondary" onclick="exportData()" style="font-size: 0.82rem; padding: 8px 13px;"
+                    title="Export JSON Backup">Export</button>
+                <button class="btn-secondary" onclick="importData()" style="font-size: 0.82rem; padding: 8px 13px;"
+                    title="Import JSON Backup">Import</button>
             </div>
 
             <div class="panel-divider"></div>
@@ -1941,13 +2100,13 @@
             <form id="addForm" class="form-grid" onsubmit="addAccount(event)">
                 <div class="field-group">
                     <label for="subName">Subject Title</label>
-                    <input type="text" id="subName" class="input-control" placeholder="e.g. Calculus / Physics Lab"
-                        required>
+                    <input type="text" id="subName" class="input-control"
+                        placeholder="e.g. Calculus / BEEE / Physics Lab" required>
                 </div>
 
                 <div class="field-group">
                     <label for="subCategory">Category</label>
-                    <select id="subCategory" class="input-control" required>
+                    <select id="subCategory" class="input-control" required onchange="onAddCategoryOrWeightChange()">
                         <option value="lecture">📖 Lecture</option>
                         <option value="tutorial">✏️ Tutorial</option>
                         <option value="practical">🔬 Practical</option>
@@ -1955,16 +2114,24 @@
                     </select>
                 </div>
 
+                <div class="field-group">
+                    <label for="subUnitWeight">Session Duration / Type</label>
+                    <select id="subUnitWeight" class="input-control" onchange="onAddCategoryOrWeightChange()">
+                        <option value="1">⏱️ 1 Hour / Session (1 Attendance Mark)</option>
+                        <option value="2">🔬 2 Hours / Lab Session (2 Attendance Marks)</option>
+                    </select>
+                </div>
+
                 <!-- Field for Direct Total Lectures -->
                 <div class="field-group" id="fieldDirectTotal">
-                    <label for="subTotalLectures">Total Semester Lectures / Sessions</label>
+                    <label for="subTotalLectures">Total Semester Hours / Sessions</label>
                     <input type="number" id="subTotalLectures" class="input-control" value="45" min="1"
                         placeholder="e.g. 45">
                 </div>
 
                 <!-- Field for Lectures Per Week -->
                 <div class="field-group" id="fieldWeeklyFreq" style="display: none;">
-                    <label for="subFreq">Lectures Per Week</label>
+                    <label for="subFreq">Sessions Per Week</label>
                     <input type="number" id="subFreq" class="input-control" value="3" min="1" max="14"
                         placeholder="e.g. 3 per week">
                 </div>
@@ -1988,8 +2155,21 @@
                 <div class="panel-title">
                     <span>Active Balances &amp; Modules</span>
                 </div>
-                <button class="btn-secondary" onclick="resetToOfficialNMIMS()" style="font-size: 0.82rem; padding: 8px 13px;"
-                    title="Reset Official NMIMS 45/30/15 Schedule">Reset Schedule</button>
+                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                    <!-- View Mode Toggle: Combined Course vs By Type -->
+                    <div class="view-mode-toggle" id="viewModeToggle">
+                        <button type="button" class="view-mode-btn active" data-mode="combined"
+                            onclick="setViewMode('combined')">
+                            👥 Combined
+                        </button>
+                        <button type="button" class="view-mode-btn" data-mode="byType" onclick="setViewMode('byType')">
+                            📑 By Type
+                        </button>
+                    </div>
+                    <button class="btn-secondary" onclick="resetToOfficialNMIMS()"
+                        style="font-size: 0.82rem; padding: 8px 13px;"
+                        title="Reset Official NMIMS 45/30/15 Schedule">Reset Schedule</button>
+                </div>
             </div>
 
             <!-- Category Filter Tabs -->
@@ -2013,9 +2193,21 @@
             </div>
         </section>
 
+        <!-- ACADEMIC TERM POLICY REFERENCE NOTICE -->
+        <div class="policy-banner" style="margin-top: 24px;">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+            </svg>
+            <span><strong>Academic Term Policy:</strong> Standard semester schedule calculation. 3/wk subjects = 45
+                total lectures (9 bunks allowed @ 80%), 2/wk = 30 lectures (6 bunks), 1/wk = 15 sessions (3
+                bunks).</span>
+        </div>
+
         <!-- SLEEK PROFESSIONAL BOTTOM-RIGHT SIGNATURE -->
-        <footer style="margin-top: 32px; padding: 16px 8px 24px; text-align: right;">
-            <p style="font-size: 0.72rem; color: var(--text-dim); margin: 0; font-family: var(--font-mono); letter-spacing: 0.05em; opacity: 0.65;">
+        <footer style="margin-top: 16px; padding: 12px 8px 24px; text-align: right;">
+            <p
+                style="font-size: 0.72rem; color: var(--text-dim); margin: 0; font-family: var(--font-mono); letter-spacing: 0.05em; opacity: 0.65;">
                 Divij Kothari
             </p>
         </footer>
@@ -2036,17 +2228,24 @@
                         <label for="editName">Subject Title</label>
                         <input type="text" id="editName" class="input-control" required>
                     </div>
-                    <div class="field-group" style="grid-column: 1 / -1;">
+                    <div class="field-group">
                         <label for="editCategory">Category</label>
-                        <select id="editCategory" class="input-control" required>
+                        <select id="editCategory" class="input-control" required onchange="onEditCategoryChange()">
                             <option value="lecture">📖 Lecture</option>
                             <option value="tutorial">✏️ Tutorial</option>
                             <option value="practical">🔬 Practical</option>
                             <option value="other">📦 Other</option>
                         </select>
                     </div>
+                    <div class="field-group">
+                        <label for="editUnitWeight">Session Duration</label>
+                        <select id="editUnitWeight" class="input-control">
+                            <option value="1">⏱️ 1 Hr / Session (1 Mark)</option>
+                            <option value="2">🔬 2 Hrs / Lab (2 Marks)</option>
+                        </select>
+                    </div>
                     <div class="field-group" style="grid-column: 1 / -1;">
-                        <label for="editTotalClasses">Total Semester Lectures (Planned)</label>
+                        <label for="editTotalClasses">Total Semester Hours Planned</label>
                         <input type="number" id="editTotalClasses" class="input-control" min="1" required>
                     </div>
                     <div class="field-group">
@@ -2082,12 +2281,15 @@
             </div>
 
             <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 14px;">
-                Upload your official college attendance report (PDF / CSV / Text). Bunk Bank instantly scans conducted &amp; attended classes, updates your ledger, and recalculates safe bunks.
+                Upload your official college attendance report (PDF / CSV / Text). Bunk Bank instantly scans conducted
+                &amp; attended classes, updates your ledger, and recalculates safe bunks.
             </p>
 
             <div class="report-tab-nav" id="reportTabNav">
-                <button class="report-tab-btn active" id="tabUploadBtn" onclick="switchReportTab('file')">📄 Upload PDF / CSV Document</button>
-                <button class="report-tab-btn" id="tabPasteBtn" onclick="switchReportTab('paste')">📝 Paste Report Text / Table</button>
+                <button class="report-tab-btn active" id="tabUploadBtn" onclick="switchReportTab('file')">📄 Upload PDF
+                    / CSV Document</button>
+                <button class="report-tab-btn" id="tabPasteBtn" onclick="switchReportTab('paste')">📝 Paste Report Text
+                    / Table</button>
             </div>
 
             <!-- File Upload Section -->
@@ -2096,9 +2298,11 @@
                     <input type="file" id="reportFileInput" accept=".pdf,.csv,.txt" style="display: none;"
                         onchange="handleReportFileSelect(event)">
                     <div class="dropzone-icon">📥</div>
-                    <div class="dropzone-text" id="dropzoneLabel">Drag &amp; drop your attendance PDF report here, or <span
-                            style="color: var(--accent-cyan); text-decoration: underline;">Browse File</span></div>
-                    <div class="dropzone-subtext">Supports NMIMS SAP portal attendance PDFs, CSV exports, or text reports.</div>
+                    <div class="dropzone-text" id="dropzoneLabel">Drag &amp; drop your attendance PDF report here, or
+                        <span style="color: var(--accent-cyan); text-decoration: underline;">Browse File</span>
+                    </div>
+                    <div class="dropzone-subtext">Supports NMIMS SAP portal attendance PDFs, CSV exports, or text
+                        reports.</div>
                 </div>
             </div>
 
@@ -2121,20 +2325,54 @@ EOB 8 6 75%"></textarea>
             <div id="reportLoadingIndicator"
                 style="display: none; text-align: center; padding: 25px; color: var(--accent-cyan); font-weight: 600; font-size: 0.95rem;">
                 <div style="font-size: 2rem; margin-bottom: 8px;">⏳</div>
-                Scanning &amp; updating attendance data...
+                Scanning &amp; parsing attendance data...
+            </div>
+
+            <!-- New Subjects Configuration Wizard Section -->
+            <div id="reportNewSubjectsSection" style="display: none; flex-direction: column; gap: 14px;">
+                <div
+                    style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.25); border-radius: var(--radius-md); padding: 14px 16px;">
+                    <div
+                        style="font-weight: 700; color: var(--heading-color); font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                        <span>⚙️ Configure Newly Detected Subjects</span>
+                        <span id="newSubjectsCountBadge" class="cat-tab-badge"
+                            style="background: var(--accent-primary); color: #fff; padding: 3px 8px;">0 New</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; line-height: 1.45;">
+                        New subjects (like BEEE, Labs, or Electives) were found. Please confirm each subject's
+                        <strong>Weekly Schedule</strong> and <strong>Session Duration (1 hr vs 2 hrs Lab)</strong> so
+                        your safe bunk quotas and 80% rule are calculated with 100% precision.
+                    </p>
+                </div>
+
+                <div id="newSubjectsListContainer" class="new-subjects-container">
+                    <!-- Dynamically populated with interactive configuration cards -->
+                </div>
+
+                <div
+                    style="display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid var(--border-glass); padding-top: 14px; margin-top: 4px;">
+                    <button type="button" class="btn-primary" onclick="confirmAndApplyNewSubjects()"
+                        style="padding: 10px 24px; font-weight: 700; background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan)); box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);">
+                        💾 Confirm &amp; Add All Subjects to Ledger
+                    </button>
+                </div>
             </div>
 
             <!-- Upload & Sync Success Card -->
-            <div id="reportSuccessSection" style="display: none; flex-direction: column; align-items: center; text-align: center; padding: 20px 10px; gap: 12px;">
-                <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid var(--safe-color); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--safe-color);">
+            <div id="reportSuccessSection"
+                style="display: none; flex-direction: column; align-items: center; text-align: center; padding: 20px 10px; gap: 12px;">
+                <div
+                    style="width: 56px; height: 56px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid var(--safe-color); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--safe-color);">
                     ✓
                 </div>
                 <div>
                     <h3 style="margin: 0 0 6px; font-size: 1.25rem; color: var(--heading-color); font-weight: 800;">
                         Attendance Report Uploaded Successfully!
                     </h3>
-                    <p id="reportSuccessSummary" style="margin: 0; font-size: 0.86rem; color: var(--text-muted); max-width: 440px; line-height: 1.4;">
-                        All detected subject accounts and safe bunk calculations have been automatically refreshed on your dashboard.
+                    <p id="reportSuccessSummary"
+                        style="margin: 0; font-size: 0.86rem; color: var(--text-muted); max-width: 440px; line-height: 1.4;">
+                        All detected subject accounts and safe bunk calculations have been automatically refreshed on
+                        your dashboard.
                     </p>
                 </div>
 
@@ -2144,16 +2382,22 @@ EOB 8 6 75%"></textarea>
                         style="font-size: 0.88rem; padding: 10px 22px; font-weight: 700; background: linear-gradient(135deg, var(--safe-color), #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
                         🚀 Done &amp; View Dashboard
                     </button>
-                    <button type="button" class="btn-secondary" id="toggleDetailsBtn" onclick="toggleReportDetailsTable()" style="font-size: 0.82rem; padding: 10px 14px;">
+                    <button type="button" class="btn-secondary" id="toggleDetailsBtn"
+                        onclick="toggleReportDetailsTable()" style="font-size: 0.82rem; padding: 10px 14px;">
                         📋 View Generated Report Breakdown
                     </button>
                 </div>
 
                 <!-- Collapsible Detailed Report Table (Hidden by default) -->
-                <div id="reportDetailsContainer" style="display: none; width: 100%; text-align: left; margin-top: 14px; border-top: 1px solid var(--panel-border); padding-top: 14px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <strong style="color: var(--heading-color); font-size: 0.85rem;">📊 Synced Subjects Breakdown:</strong>
-                        <span id="detectedCountBadge" class="cat-tab-badge" style="background: rgba(99, 102, 241, 0.3); font-size: 0.72rem; padding: 3px 7px;">0 Subjects</span>
+                <div id="reportDetailsContainer"
+                    style="display: none; width: 100%; text-align: left; margin-top: 14px; border-top: 1px solid var(--panel-border); padding-top: 14px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <strong style="color: var(--heading-color); font-size: 0.85rem;">📊 Synced Subjects
+                            Breakdown:</strong>
+                        <span id="detectedCountBadge" class="cat-tab-badge"
+                            style="background: rgba(99, 102, 241, 0.3); font-size: 0.72rem; padding: 3px 7px;">0
+                            Subjects</span>
                     </div>
                     <div class="preview-table-container" style="max-height: 240px; overflow-y: auto;">
                         <table class="preview-table">
@@ -2286,6 +2530,40 @@ EOB 8 6 75%"></textarea>
 
         let addMode = 'fixed'; // 'fixed' or 'weekly'
         let activeFilter = 'all';
+        let currentViewMode = localStorage.getItem('bunkBank_viewMode') || 'combined';
+
+        // Helper to extract clean base course name for display aggregation (exact match)
+        function getBaseCourseName(name) {
+            if (!name) return 'Unknown Module';
+            let clean = name.trim();
+            // Strip trailing lecture type indicators like (Tutorial), (Practical), (Theory), (Lab), (Lecture), [THEO], (PRAC), etc.
+            clean = clean.replace(/\s*[\(\[]?\b(THEO|PRAC|TUTL|STUD|LAB|THEORY|PRACTICAL|TUTORIAL|LECTURE)\b[\)\]]?\s*$/i, '');
+            clean = clean.replace(/[\-_–—\s]+$/, '').trim();
+            return clean || name.trim();
+        }
+
+        // View Mode Switcher: Combined Course vs By Type
+        function setViewMode(mode, animate = true) {
+            currentViewMode = mode;
+            localStorage.setItem('bunkBank_viewMode', mode);
+
+            document.querySelectorAll('.view-mode-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
+            });
+
+            updateAll();
+
+            if (animate && window.gsap) {
+                const container = document.getElementById('accountsContainer');
+                if (container && container.children.length > 0) {
+                    gsap.killTweensOf(container.children);
+                    gsap.fromTo(container.children,
+                        { opacity: 0, y: 10 },
+                        { opacity: 1, y: 0, duration: 0.3, stagger: 0.03, ease: "power3.out" }
+                    );
+                }
+            }
+        }
 
         // Load or initialize accounts
         let accounts = JSON.parse(localStorage.getItem('bunkBank_nmims_v5'));
@@ -2466,7 +2744,7 @@ EOB 8 6 75%"></textarea>
                 });
 
                 // Compact, fast 0.35s skid line
-                tl.fromTo(skid, 
+                tl.fromTo(skid,
                     { scaleX: 0, opacity: 0.85 },
                     { scaleX: 0.75, opacity: 0, duration: 0.35, ease: "power2.out" },
                     0
@@ -2483,7 +2761,7 @@ EOB 8 6 75%"></textarea>
                 smokePuffs.forEach((puff, idx) => {
                     const delay = 0.03 + (idx / numPuffs) * 0.12;
                     const driftY = -(8 + Math.random() * 14);
-                    
+
                     tl.fromTo(puff,
                         { opacity: 0, scale: 0.3, y: 0 },
                         { opacity: 0.6, scale: 1.1, y: driftY * 0.5, duration: 0.12, ease: "power1.out" },
@@ -2521,7 +2799,7 @@ EOB 8 6 75%"></textarea>
             const hasReportData = (acc.conductedSoFar !== undefined && acc.conductedSoFar !== null && acc.conductedSoFar !== '');
             const conducted = hasReportData ? Math.max(0, parseFloat(acc.conductedSoFar)) : null;
             const attended = (hasReportData && acc.attendedSoFar !== undefined) ? Math.max(0, parseFloat(acc.attendedSoFar)) : null;
-            
+
             let missed = parseFloat(acc.missed) || 0;
             if (conducted !== null && attended !== null) {
                 missed = Math.max(0, conducted - attended);
@@ -2533,8 +2811,8 @@ EOB 8 6 75%"></textarea>
             const balance = maxBunksAllowed - missed;
 
             // Remaining classes to be conducted in the semester
-            const remainingLectures = conducted !== null 
-                ? Math.max(0, totalClasses - conducted) 
+            const remainingLectures = conducted !== null
+                ? Math.max(0, totalClasses - conducted)
                 : 0;
 
             // Total expected attended classes by semester end (assuming 100% attendance in future classes)
@@ -2545,8 +2823,8 @@ EOB 8 6 75%"></textarea>
             const termPct = totalClasses > 0 ? Math.round((totalAttendedExpected / totalClasses) * 100) : 100;
 
             // 2. Standing Report Percentage So Far (e.g. 9/12 conducted so far = 75%)
-            const reportPct = (conducted !== null && conducted > 0) 
-                ? Math.round((attended / conducted) * 100) 
+            const reportPct = (conducted !== null && conducted > 0)
+                ? Math.round((attended / conducted) * 100)
                 : null;
 
             // Current display percentage on gauge defaults to term-end attendance %
@@ -2609,7 +2887,7 @@ EOB 8 6 75%"></textarea>
 
             const gaugeMax = maxBunksAllowed > 0 ? maxBunksAllowed : 1;
             const spentPct = Math.min(100, Math.round((missed / gaugeMax) * 100));
-            const circumference = 2 * Math.PI * 38;
+            const circumference = 2 * Math.PI * 82; // High-precision 200x200 viewBox radius 82
             const strokeDashoffset = circumference - (currentPct / 100) * circumference;
 
             return {
@@ -2648,6 +2926,23 @@ EOB 8 6 75%"></textarea>
                 sessionsRemaining,
                 sessionsNeeded
             };
+        }
+
+        function renderGaugePctHtml(pctVal) {
+            const str = `${pctVal}%`;
+            let fontSize = '1.24rem';
+            let letterSpacing = '-0.02em';
+            if (str.length >= 7) { // e.g. "100.00%"
+                fontSize = '0.94rem';
+                letterSpacing = '-0.04em';
+            } else if (str.length >= 6) { // e.g. "83.78%"
+                fontSize = '1.04rem';
+                letterSpacing = '-0.03em';
+            } else if (str.length >= 5) { // e.g. "100%", "75.0%"
+                fontSize = '1.14rem';
+                letterSpacing = '-0.02em';
+            }
+            return `<span class="gauge-pct" style="font-size: ${fontSize}; letter-spacing: ${letterSpacing};">${str}</span>`;
         }
 
         function updateSingleCardDOM(acc) {
@@ -2700,7 +2995,22 @@ EOB 8 6 75%"></textarea>
             }
             const gaugePct = card.querySelector('.gauge-pct');
             if (gaugePct) {
-                gaugePct.textContent = `${m.currentPct}%`;
+                const str = `${m.currentPct}%`;
+                let fontSize = '1.24rem';
+                let letterSpacing = '-0.02em';
+                if (str.length >= 7) {
+                    fontSize = '0.94rem';
+                    letterSpacing = '-0.04em';
+                } else if (str.length >= 6) {
+                    fontSize = '1.04rem';
+                    letterSpacing = '-0.03em';
+                } else if (str.length >= 5) {
+                    fontSize = '1.14rem';
+                    letterSpacing = '-0.02em';
+                }
+                gaugePct.style.fontSize = fontSize;
+                gaugePct.style.letterSpacing = letterSpacing;
+                gaugePct.textContent = str;
             }
         }
 
@@ -2724,18 +3034,52 @@ EOB 8 6 75%"></textarea>
             updateDashboard(overallPct, netBalanceSum, defaulterCount, accounts.length, totalClassesSum);
         }
 
+        function onAddCategoryOrWeightChange() {
+            const cat = document.getElementById('subCategory').value;
+            const weightSelect = document.getElementById('subUnitWeight');
+            const totalInput = document.getElementById('subTotalLectures');
+            const freqInput = document.getElementById('subFreq');
+
+            if (cat === 'practical') {
+                weightSelect.value = "2";
+                if (addMode === 'fixed') {
+                    if (totalInput.value == "45" || totalInput.value == "15") totalInput.value = "30";
+                } else {
+                    if (freqInput.value == "3") freqInput.value = "1";
+                }
+            } else if (cat === 'tutorial') {
+                weightSelect.value = "1";
+                if (addMode === 'fixed') {
+                    if (totalInput.value == "45") totalInput.value = "15";
+                } else {
+                    if (freqInput.value == "3") freqInput.value = "1";
+                }
+            } else {
+                weightSelect.value = "1";
+                if (addMode === 'fixed') {
+                    if (totalInput.value == "15" || totalInput.value == "30") totalInput.value = "45";
+                } else {
+                    if (freqInput.value == "1") freqInput.value = "3";
+                }
+            }
+        }
+
         function addAccount(e) {
             e.preventDefault();
             const nameInput = document.getElementById('subName');
             const catInput = document.getElementById('subCategory');
+            const unitWeightInput = document.getElementById('subUnitWeight');
 
             const nameVal = nameInput.value.trim();
             if (!nameVal) return;
+
+            const unitWeight = parseInt(unitWeightInput ? unitWeightInput.value : '1', 10) || (catInput.value === 'practical' ? 2 : 1);
 
             let newAcc = {
                 id: 'acc_' + Date.now(),
                 name: nameVal,
                 category: catInput.value || 'lecture',
+                unitWeight: unitWeight,
                 missed: 0
             };
 
@@ -2798,18 +3142,33 @@ EOB 8 6 75%"></textarea>
                     acc.missed = Math.max(0, (parseFloat(acc.missed) || 0) + change);
                 }
 
-                updateSingleCardDOM(acc);
-                recalcGlobalDashboard();
-
-                const cardEl = document.getElementById(`acc-${id}`);
-                if (cardEl) {
-                    if (window.gsap) {
-                        gsap.fromTo(cardEl, 
-                            { scale: 1 }, 
-                            { scale: 1.008, duration: 0.1, ease: "power2.out", yoyo: true, repeat: 1 }
-                        );
+                if (currentViewMode === 'combined') {
+                    updateAll();
+                    const baseCourseId = 'course-' + getBaseCourseName(acc.name).replace(/\s+/g, '-');
+                    const cardEl = document.getElementById(baseCourseId);
+                    if (cardEl) {
+                        if (window.gsap) {
+                            gsap.fromTo(cardEl,
+                                { scale: 1 },
+                                { scale: 1.012, duration: 0.12, ease: "sine.out", yoyo: true, repeat: 1, transformOrigin: "center center" }
+                            );
+                        }
+                        triggerApexBurnoutEffect(cardEl);
                     }
-                    triggerApexBurnoutEffect(cardEl);
+                } else {
+                    updateSingleCardDOM(acc);
+                    recalcGlobalDashboard();
+
+                    const cardEl = document.getElementById(`acc-${id}`);
+                    if (cardEl) {
+                        if (window.gsap) {
+                            gsap.fromTo(cardEl,
+                                { scale: 1 },
+                                { scale: 1.012, duration: 0.12, ease: "sine.out", yoyo: true, repeat: 1, transformOrigin: "center center" }
+                            );
+                        }
+                        triggerApexBurnoutEffect(cardEl);
+                    }
                 }
             }
         }
@@ -2832,6 +3191,7 @@ EOB 8 6 75%"></textarea>
             document.getElementById('editId').value = acc.id;
             document.getElementById('editName').value = acc.name;
             document.getElementById('editCategory').value = acc.category || 'lecture';
+            document.getElementById('editUnitWeight').value = acc.unitWeight || (acc.category === 'practical' ? 2 : 1);
             document.getElementById('editTotalClasses').value = totalClasses;
             document.getElementById('editConducted').value = acc.conductedSoFar !== undefined ? acc.conductedSoFar : '';
             document.getElementById('editAttended').value = acc.attendedSoFar !== undefined ? acc.attendedSoFar : '';
@@ -2839,6 +3199,22 @@ EOB 8 6 75%"></textarea>
 
             const modal = document.getElementById('editModal');
             modal.classList.add('active');
+        }
+
+        function onEditCategoryChange() {
+            const cat = document.getElementById('editCategory').value;
+            const weightSelect = document.getElementById('editUnitWeight');
+            const totalInput = document.getElementById('editTotalClasses');
+            if (cat === 'practical') {
+                weightSelect.value = "2";
+                if (totalInput.value == "45" || totalInput.value == "15") totalInput.value = "30";
+            } else if (cat === 'tutorial') {
+                weightSelect.value = "1";
+                if (totalInput.value == "45") totalInput.value = "15";
+            } else {
+                weightSelect.value = "1";
+                if (totalInput.value == "15" || totalInput.value == "30") totalInput.value = "45";
+            }
         }
 
         function onEditReportNumbersChange() {
@@ -2876,8 +3252,9 @@ EOB 8 6 75%"></textarea>
             if (acc) {
                 acc.name = document.getElementById('editName').value.trim();
                 acc.category = document.getElementById('editCategory').value;
+                acc.unitWeight = parseInt(document.getElementById('editUnitWeight').value, 10) || (acc.category === 'practical' ? 2 : 1);
                 acc.totalClasses = parseFloat(document.getElementById('editTotalClasses').value);
-                
+
                 const cVal = document.getElementById('editConducted').value;
                 const aVal = document.getElementById('editAttended').value;
                 if (cVal !== '') acc.conductedSoFar = parseFloat(cVal);
@@ -2925,7 +3302,7 @@ EOB 8 6 75%"></textarea>
             }, null, 2));
             const downloadAnchor = document.createElement('a');
             downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", `bunkbank_nmims_ce_schedule_${new Date().toISOString().slice(0,10)}.json`);
+            downloadAnchor.setAttribute("download", `bunkbank_nmims_ce_schedule_${new Date().toISOString().slice(0, 10)}.json`);
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
@@ -2994,22 +3371,27 @@ EOB 8 6 75%"></textarea>
 
         function openReportModal() {
             parsedReportItems = [];
+            pendingNewReportItems = [];  // FIX: reset stale wizard data on every modal open
             const tabNav = document.getElementById('reportTabNav');
             if (tabNav) tabNav.style.display = 'flex';
             const successSec = document.getElementById('reportSuccessSection');
             if (successSec) successSec.style.display = 'none';
+            const newSec = document.getElementById('reportNewSubjectsSection');
+            if (newSec) newSec.style.display = 'none';  // FIX: hide wizard on re-open
             const detailsSec = document.getElementById('reportDetailsContainer');
             if (detailsSec) detailsSec.style.display = 'none';
             const toggleBtn = document.getElementById('toggleDetailsBtn');
             if (toggleBtn) toggleBtn.innerHTML = '📋 View Generated Report Breakdown';
             const loading = document.getElementById('reportLoadingIndicator');
             if (loading) loading.style.display = 'none';
-            
+
             const fileInput = document.getElementById('reportFileInput');
             if (fileInput) fileInput.value = '';
+            const pasteArea = document.getElementById('reportPasteArea');
+            if (pasteArea) pasteArea.value = '';  // FIX: clear previous paste on re-open
             const dropLabel = document.getElementById('dropzoneLabel');
             if (dropLabel) dropLabel.innerHTML = `Drag &amp; drop your attendance PDF report here, or <span style="color: var(--accent-cyan); text-decoration: underline;">Browse File</span>`;
-            
+
             switchReportTab('file');
             document.getElementById('reportModal').classList.add('active');
         }
@@ -3090,9 +3472,9 @@ EOB 8 6 75%"></textarea>
             if (isPdf) {
                 if (window.pdfjsLib) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         const typedarray = new Uint8Array(e.target.result);
-                        pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
+                        pdfjsLib.getDocument(typedarray).promise.then(function (pdf) {
                             let maxPages = pdf.numPages;
                             let countPromises = [];
                             for (let j = 1; j <= maxPages; j++) {
@@ -3101,7 +3483,7 @@ EOB 8 6 75%"></textarea>
                                         let lastY = null;
                                         let pageLines = [];
                                         let currentLine = '';
-                                        
+
                                         for (let item of textContent.items) {
                                             if (lastY === null || Math.abs(item.transform[5] - lastY) < 4) {
                                                 currentLine += (currentLine ? ' ' : '') + item.str;
@@ -3144,7 +3526,7 @@ EOB 8 6 75%"></textarea>
             } else {
                 // CSV or Text file
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     loadingIndicator.style.display = 'none';
                     parseAndDisplayReportText(e.target.result);
                 };
@@ -3173,19 +3555,29 @@ EOB 8 6 75%"></textarea>
             // Strip trailing lecture type indicators like (THEO), (PRAC), THEO, PRAC, TUTL, LAB, etc.
             s = s.replace(/\s*[\(\[]?\b(THEO|PRAC|TUTL|STUD|LAB|THEORY|PRACTICAL|TUTORIAL)\b[\)\]]?\s*$/i, '');
             s = s.replace(/[\-_–—]+$/, '').replace(/\s+/g, ' ').trim();
-            
+
             const u = s.toUpperCase();
-            if (u.includes('GRAPHICS') || u.includes('DESIGN') || u.includes('EGD')) return 'Engineering Graphics & Design';
+            if (u.includes('BEEE') || u.includes('BASIC ELECTRICAL')) return 'Basic Electrical & Electronics Engineering (BEEE)';
+            if (u.includes('DATA STRUCTURE') || u.includes('DSA')) return 'Data Structures & Algorithms'; // BEFORE STUDIES or CALCULUS
+            if (u.includes('DIGITAL ELECTRONICS') || u.includes('DIGITAL LOGIC') || u.includes('DELD')) return 'Digital Electronics & Logic Design';
+            if (u.includes('DATABASE MANAGEMENT') || u.includes('DBMS')) return 'Database Management Systems';
+            if (u.includes('COMPUTER NETWORK')) return 'Computer Networks';
+            if (u.includes('OPERATING SYSTEM')) return 'Operating Systems';
+            if (u.includes('MACHINE LEARNING')) return 'Machine Learning';
+            if (u.includes('ARTIFICIAL INTELLIGENCE')) return 'Artificial Intelligence';
+            if (u.includes('DEEP LEARNING')) return 'Deep Learning';
+            if (u.includes('GRAPHICS') || u.includes('EGD')) return 'Engineering Graphics & Design';
             if (u.includes('CALCULUS') || u.includes('CALC')) return 'Calculus';
             if (u.includes('PHYSIC')) return 'Physics';
             if (u.includes('MANAGEMENT') || u.includes('POM')) return 'Principles of Management';
-            if (u.includes('ETHIC')) return 'Engineering Ethics';
-            if (u.includes('INDIAN') || u.includes('KNOWLEDGE') || u.includes('IKS')) return 'Indian Knowledge System';
-            if (u.includes('ELECTRONIC') || u.includes('EEP') || u.includes('ESSENTIAL')) return 'Essential Electronics Practices';
-            if (u.includes('COMPUTATIONAL') || u.includes('THINKING') || u.includes('CTPS')) return 'Computational Thinking (CTPS)';
-            if (u.includes('ENVIRONMENTAL') || u.includes('STUDIES') || u.includes('ES')) return 'Environmental Studies';
+            if (u.includes('ENGINEERING ETHICS') || u.includes('ETHIC')) return 'Engineering Ethics';
+            if (u.includes('INDIAN KNOWLEDGE') || u.includes('IKS')) return 'Indian Knowledge System';
+            if (u.includes('ESSENTIAL ELECTRONICS') || u.includes('EEP')) return 'Essential Electronics Practices';
+            if (u.includes('COMPUTATIONAL THINKING') || u.includes('CTPS')) return 'Computational Thinking (CTPS)';
+            if (u.includes('ENVIRONMENTAL STUD')) return 'Environmental Studies';
             if (u.includes('BIOLOGY') || u.includes('EOB')) return 'Elements of Biology';
-            
+            if (u.includes('CHEMISTRY') || u.includes('CHEM')) return 'Chemistry';
+
             // Format generic course name: convert ALL-CAPS names to readable Title Case
             if (s.length > 2) {
                 if (s === s.toUpperCase()) {
@@ -3210,27 +3602,37 @@ EOB 8 6 75%"></textarea>
 
             const nameClean = nameUpper.replace(/\s*[\(\[]?\b(THEO|PRAC|TUTL|STUD|LAB|THEORY|PRACTICAL|TUTORIAL)\b[\)\]]?\s*/gi, '').trim();
 
-            // Semantic alias map for common subjects
+            // FIX: Semantic alias map with precise multi-word tokens only — no 2-letter standalone aliases
+            // Short tokens like 'EE', 'ES', 'IKS' caused false-positive matches on substrings
             const aliases = {
-                'Calculus': ['CALCULUS', 'CALC', 'MATH', 'MATHEMATICS'],
-                'CTPS': ['COMPUTATIONAL', 'CTPS', 'PROBLEM SOLV'],
-                'Physics': ['PHYSICS', 'PHYSIC'],
-                'EOB': ['BIOLOGY', 'BIO', 'EOB'],
-                'IKS': ['INDIAN', 'KNOWLEDGE', 'IKS'],
-                'EGD': ['GRAPHICS', 'DESIGN', 'EGD', 'GRAP'],
-                'EE': ['ETHICS', 'EE'],
-                'ES': ['ENVIRONMENTAL', 'STUDIES', 'ES'],
-                'EEP': ['ELECTRONIC', 'EEP', 'ESSENTIAL'],
-                'Principles of Management': ['MANAGEMENT', 'POM', 'PRINCIPLES OF MANAGEMENT']
+                'Calculus': ['CALCULUS', 'CALC'],
+                'CTPS': ['COMPUTATIONAL THINKING', 'CTPS'],
+                'Physics': ['PHYSICS'],
+                'EOB': ['ELEMENTS OF BIOLOGY', 'BIOLOGY', 'EOB'],
+                'IKS': ['INDIAN KNOWLEDGE', 'IKS'],
+                'EGD': ['ENGINEERING GRAPHICS', 'EGD'],
+                'Engineering Ethics': ['ENGINEERING ETHICS', 'ETHICS'],
+                'Environmental Studies': ['ENVIRONMENTAL STUDIES', 'ENVIRONMENTAL'],
+                'EEP': ['ESSENTIAL ELECTRONICS', 'EEP'],
+                'BEEE': ['BEEE', 'BASIC ELECTRICAL', 'ELECTRICAL AND ELECTRONICS', 'ELECTRICAL & ELECTRONICS'],
+                'Principles of Management': ['PRINCIPLES OF MANAGEMENT', 'MANAGEMENT'],
+                'Data Structures': ['DATA STRUCTURES', 'DATA STRUCTURE', 'DSA'],
+                'Digital Electronics': ['DIGITAL ELECTRONICS', 'DIGITAL LOGIC', 'DELD'],
+                'Database': ['DATABASE MANAGEMENT', 'DBMS'],
+                'Computer Networks': ['COMPUTER NETWORKS', 'COMPUTER NETWORK'],
+                'Operating Systems': ['OPERATING SYSTEMS', 'OPERATING SYSTEM'],
+                'Machine Learning': ['MACHINE LEARNING'],
+                'Artificial Intelligence': ['ARTIFICIAL INTELLIGENCE']
             };
 
-            // 1. Check direct keyword match within same category
+            // 1. Check semantic alias match within same category
             for (let acc of accountsList) {
                 const accCat = acc.category || 'lecture';
                 if (accCat !== targetCategory) continue;
 
                 const accNameUpper = acc.name.toUpperCase();
                 for (let [subjectKey, tokens] of Object.entries(aliases)) {
+                    // Both the account name AND the incoming report name must hit a token
                     const isAccMatch = accNameUpper.includes(subjectKey.toUpperCase()) || tokens.some(t => accNameUpper.includes(t));
                     const isTargetMatch = tokens.some(t => nameClean.includes(t));
                     if (isAccMatch && isTargetMatch) {
@@ -3239,12 +3641,18 @@ EOB 8 6 75%"></textarea>
                 }
             }
 
-            // 2. Generic inclusion within same category
+            // 2. FIX: Generic inclusion — only allow if the matching token is >= 4 chars
+            // to prevent 'EE' from matching 'BEEE', 'ES' from matching 'THESES', etc.
             for (let acc of accountsList) {
                 const accCat = acc.category || 'lecture';
                 if (accCat === targetCategory) {
                     const accNameUpper = acc.name.toUpperCase();
-                    if (accNameUpper === nameClean || accNameUpper.includes(nameClean) || nameClean.includes(accNameUpper)) {
+                    // Exact match always allowed
+                    if (accNameUpper === nameClean) return acc.id;
+                    // Substring match only when the shorter name is >= 4 chars (avoids 2-3 letter false hits)
+                    const longer = accNameUpper.length > nameClean.length ? accNameUpper : nameClean;
+                    const shorter = accNameUpper.length <= nameClean.length ? accNameUpper : nameClean;
+                    if (shorter.length >= 4 && longer.includes(shorter)) {
                         return acc.id;
                     }
                 }
@@ -3252,6 +3660,8 @@ EOB 8 6 75%"></textarea>
 
             return 'new';
         }
+
+        let pendingNewReportItems = [];
 
         // Universal intelligent parser for university reports (NMIMS / SVKM table formats & pasted text)
         function parseAndDisplayReportText(rawText) {
@@ -3367,11 +3777,7 @@ EOB 8 6 75%"></textarea>
                 return;
             }
 
-            // Auto-sync into ledger directly
-            const syncStats = applyReportSyncDirect();
-
-            // Populate preview details table for optional breakdown inspection
-            renderReportPreviewTable();
+            const newItems = parsedReportItems.filter(item => item.matchedId === 'new');
 
             // Hide upload input tabs and loading indicator
             const tabNav = document.getElementById('reportTabNav');
@@ -3383,22 +3789,230 @@ EOB 8 6 75%"></textarea>
             const loading = document.getElementById('reportLoadingIndicator');
             if (loading) loading.style.display = 'none';
 
-            // Show Sleek Upload Successful state
+            if (newItems.length > 0) {
+                // Present dedicated New Subjects Configuration Wizard
+                renderNewSubjectsConfigStep(newItems);
+                const newSec = document.getElementById('reportNewSubjectsSection');
+                if (newSec) newSec.style.display = 'flex';
+            } else {
+                // Auto-sync into ledger directly if all matched
+                const syncStats = applyReportSyncDirect([]);
+                renderReportPreviewTable();
+                showReportSuccessScreen(syncStats);
+            }
+        }
+
+        function renderNewSubjectsConfigStep(newItems) {
+            pendingNewReportItems = newItems;
+            const container = document.getElementById('newSubjectsListContainer');
+            const badge = document.getElementById('newSubjectsCountBadge');
+            if (badge) badge.textContent = `${newItems.length} New`;
+            if (!container) return;
+            container.innerHTML = '';
+
+            newItems.forEach((item, idx) => {
+                const cleanLower = (item.cleanName || item.detectedName || '').toLowerCase();
+                const typeUpper = (item.type || '').toUpperCase();
+
+                let defCategory = 'lecture';
+                if (['PRAC', 'PRACTICAL', 'LAB', 'WORKSHOP', 'STUDIO'].includes(typeUpper) ||
+                    cleanLower.includes('prac') || cleanLower.includes('lab') || cleanLower.includes('workshop') || cleanLower.includes('studio')) {
+                    defCategory = 'practical';
+                } else if (['TUTL', 'TUTORIAL', 'TUT'].includes(typeUpper) || cleanLower.includes('tut')) {
+                    defCategory = 'tutorial';
+                }
+
+                const defWeight = defCategory === 'practical' ? 2 : 1;
+                const defFreq = defCategory === 'lecture' ? 3 : 1;
+
+                const card = document.createElement('div');
+                card.className = 'new-subject-card';
+                card.id = `newSubjCard_${idx}`;
+                card.innerHTML = `
+                    <div class="new-subject-header">
+                        <div>
+                            <div class="new-subject-title">${escapeHtml(item.cleanName || item.detectedName)}</div>
+                            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 2px;">
+                                Report Standing: <strong>${item.attended}/${item.conducted} hrs conducted (${item.pct}%)</strong>
+                            </div>
+                        </div>
+                        <span class="new-subject-preview-badge" id="newSubjBadge_${idx}">
+                            Planned: 45 hrs • Safe Bunks: 9
+                        </span>
+                    </div>
+
+                    <div class="new-subject-fields">
+                        <div class="field-group">
+                            <label>Subject Display Name</label>
+                            <input type="text" id="newSubjName_${idx}" class="input-control" value="${escapeHtml(item.cleanName || item.detectedName)}" required>
+                        </div>
+                        <div class="field-group">
+                            <label>Category</label>
+                            <select id="newSubjCat_${idx}" class="input-control" onchange="onNewSubjectCategoryChange(${idx})">
+                                <option value="lecture" ${defCategory === 'lecture' ? 'selected' : ''}>📖 Lecture</option>
+                                <option value="tutorial" ${defCategory === 'tutorial' ? 'selected' : ''}>✏️ Tutorial</option>
+                                <option value="practical" ${defCategory === 'practical' ? 'selected' : ''}>🔬 Practical</option>
+                                <option value="other" ${defCategory === 'other' ? 'selected' : ''}>📦 Other</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>Session Duration</label>
+                            <select id="newSubjWeight_${idx}" class="input-control" onchange="onNewSubjectParamChange(${idx})">
+                                <option value="1" ${defWeight === 1 ? 'selected' : ''}>⏱️ 1 Hr / Session (1 Mark)</option>
+                                <option value="2" ${defWeight === 2 ? 'selected' : ''}>🔬 2 Hrs / Lab (2 Marks)</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label>Weekly Schedule</label>
+                            <select id="newSubjFreq_${idx}" class="input-control" onchange="onNewSubjectParamChange(${idx})">
+                                <option value="3" ${defFreq === 3 ? 'selected' : ''}>3 Sessions / Week (~45 hrs)</option>
+                                <option value="2" ${defFreq === 2 ? 'selected' : ''}>2 Sessions / Week (~30 hrs)</option>
+                                <option value="1" ${defFreq === 1 ? 'selected' : ''}>1 Session / Week (~15 hrs / 30 hrs Lab)</option>
+                                <option value="4" ${defFreq === 4 ? 'selected' : ''}>4 Sessions / Week (~60 hrs)</option>
+                                <option value="custom">🎯 Custom Planned Hours</option>
+                            </select>
+                        </div>
+                        <div class="field-group" id="newSubjCustomGroup_${idx}" style="display: none; grid-column: 1 / -1;">
+                            <label>Custom Total Semester Planned Hours</label>
+                            <input type="number" id="newSubjCustomHours_${idx}" class="input-control" value="45" min="1" oninput="onNewSubjectParamChange(${idx})">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+                onNewSubjectParamChange(idx);
+            });
+        }
+
+        function onNewSubjectCategoryChange(idx) {
+            const cat = document.getElementById(`newSubjCat_${idx}`).value;
+            const weightSelect = document.getElementById(`newSubjWeight_${idx}`);
+            const freqSelect = document.getElementById(`newSubjFreq_${idx}`);
+
+            if (cat === 'practical') {
+                weightSelect.value = "2";
+                freqSelect.value = "1";
+            } else if (cat === 'tutorial') {
+                weightSelect.value = "1";
+                freqSelect.value = "1";
+            } else {
+                weightSelect.value = "1";
+                freqSelect.value = "3";
+            }
+            onNewSubjectParamChange(idx);
+        }
+
+        function onNewSubjectParamChange(idx) {
+            const cat = document.getElementById(`newSubjCat_${idx}`).value;
+            const weight = parseInt(document.getElementById(`newSubjWeight_${idx}`).value, 10) || 1;
+            const freqSelect = document.getElementById(`newSubjFreq_${idx}`).value;
+            const customGroup = document.getElementById(`newSubjCustomGroup_${idx}`);
+            const customInput = document.getElementById(`newSubjCustomHours_${idx}`);
+
+            const semLen = parseFloat(document.getElementById('semLen').value) || 15;
+            const semUnit = parseFloat(document.getElementById('semUnit').value) || 1;
+            const totalWeeks = Math.max(1, Math.round(semLen * semUnit));
+            const requiredRatio = parseFloat(document.getElementById('targetPct').value) || 0.80;
+
+            let totalClasses = 45;
+            if (freqSelect === 'custom') {
+                customGroup.style.display = 'flex';
+                totalClasses = Math.max(1, parseFloat(customInput.value) || 45);
+            } else {
+                customGroup.style.display = 'none';
+                const freq = parseFloat(freqSelect) || 3;
+                totalClasses = Math.round(freq * totalWeeks * (weight === 2 && cat === 'practical' ? 2 : 1));
+            }
+
+            const item = pendingNewReportItems[idx];
+            if (item && item.conducted > totalClasses) {
+                totalClasses = item.conducted;
+            }
+
+            const unitSingular = weight === 2 ? 'Lab' : 'Session';
+            const unitPlural = weight === 2 ? 'Labs' : 'Sessions';
+            const totalSessions = Math.round(totalClasses / weight);
+            const minAttended = Math.ceil(totalClasses * requiredRatio);
+            const maxBunksHours = Math.max(0, totalClasses - minAttended);
+            const maxBunksSessions = Math.floor(maxBunksHours / weight);
+
+            const badge = document.getElementById(`newSubjBadge_${idx}`);
+            if (badge) {
+                badge.innerHTML = `📊 Planned: <strong>${totalClasses} hrs</strong> (${totalSessions} ${unitPlural}) • Safe Bunks: <strong>${maxBunksSessions} ${unitPlural}</strong>`;
+            }
+        }
+
+        function confirmAndApplyNewSubjects() {
+            if (!pendingNewReportItems || pendingNewReportItems.length === 0) return;
+
+            const configuredNewAccounts = [];
+            const semLen = parseFloat(document.getElementById('semLen').value) || 15;
+            const semUnit = parseFloat(document.getElementById('semUnit').value) || 1;
+            const totalWeeks = Math.max(1, Math.round(semLen * semUnit));
+
+            for (let i = 0; i < pendingNewReportItems.length; i++) {
+                const item = pendingNewReportItems[i];
+                const name = document.getElementById(`newSubjName_${i}`).value.trim() || item.cleanName || item.detectedName;
+                const category = document.getElementById(`newSubjCat_${i}`).value;
+                const unitWeight = parseInt(document.getElementById(`newSubjWeight_${i}`).value, 10) || 1;
+                const freqSelect = document.getElementById(`newSubjFreq_${i}`).value;
+
+                let totalClasses = 45;
+                let freq = 3;
+                if (freqSelect === 'custom') {
+                    totalClasses = Math.max(1, parseFloat(document.getElementById(`newSubjCustomHours_${i}`).value) || 45);
+                    freq = Math.round((totalClasses / totalWeeks) * 10) / 10;
+                } else {
+                    freq = parseFloat(freqSelect) || 3;
+                    totalClasses = Math.round(freq * totalWeeks * (unitWeight === 2 && category === 'practical' ? 2 : 1));
+                }
+
+                if (item.conducted > totalClasses) {
+                    totalClasses = item.conducted;
+                }
+
+                const newAcc = {
+                    id: 'acc_' + Date.now() + '_' + i,
+                    name: name,
+                    category: category,
+                    unitWeight: unitWeight,
+                    totalClasses: totalClasses,
+                    freq: freq,
+                    occ: 'week',
+                    conductedSoFar: item.conducted,
+                    attendedSoFar: item.attended,
+                    missed: Math.max(0, item.conducted - item.attended),
+                    isFixed: true
+                };
+
+                configuredNewAccounts.push(newAcc);
+                item.matchedId = newAcc.id;
+            }
+
+            const syncStats = applyReportSyncDirect(configuredNewAccounts);
+            renderReportPreviewTable();
+
+            const newSec = document.getElementById('reportNewSubjectsSection');
+            if (newSec) newSec.style.display = 'none';
+
+            showReportSuccessScreen(syncStats);
+        }
+
+        function showReportSuccessScreen(syncStats) {
             const successSummary = document.getElementById('reportSuccessSummary');
             if (successSummary) {
                 const totalCount = syncStats.updatedCount + syncStats.createdCount;
                 let msg = `Successfully synced <strong>${totalCount}</strong> subjects from your report!`;
                 if (syncStats.createdCount > 0) {
-                    msg += ` (${syncStats.createdCount} new ${syncStats.createdCount === 1 ? 'subject added' : 'subjects added'})`;
+                    msg += ` (${syncStats.createdCount} new ${syncStats.createdCount === 1 ? 'subject added & configured' : 'subjects added & configured'})`;
                 }
-                msg += ` Your safe bunk allowances and term projections are refreshed.`;
+                msg += ` Your safe bunk allowances and term projections are refreshed with 100% precision.`;
                 successSummary.innerHTML = msg;
             }
             const successSec = document.getElementById('reportSuccessSection');
             if (successSec) successSec.style.display = 'flex';
 
             const totalCount = syncStats.updatedCount + syncStats.createdCount;
-            showToast(`✨ Attendance Report Synced Successfully! (${totalCount} subjects synced) 📊`);
+            showToast(`✨ Report Synced! (${totalCount} subjects refreshed) 📊`);
         }
 
         function renderReportPreviewTable() {
@@ -3462,59 +4076,20 @@ EOB 8 6 75%"></textarea>
             if (badge) badge.textContent = `${parsedReportItems.length} Subjects Synced`;
         }
 
-        function applyReportSyncDirect() {
+        function applyReportSyncDirect(configuredNewAccounts = []) {
             let updatedCount = 0;
             let createdCount = 0;
 
-            const semLen = parseFloat(document.getElementById('semLen').value) || 15;
-            const semUnit = parseFloat(document.getElementById('semUnit').value) || 1;
-            const totalWeeks = Math.max(1, Math.round(semLen * semUnit));
-
-            parsedReportItems.forEach((item, index) => {
-                const matchId = item.matchedId;
-                if (matchId === 'ignore') return;
-
-                if (matchId === 'new') {
-                    let category = 'lecture';
-                    const typeUpper = (item.type || '').toUpperCase();
-                    const cleanLower = (item.cleanName || item.detectedName || '').toLowerCase();
-
-                    if (['PRAC', 'PRACTICAL', 'LAB', 'WORKSHOP', 'STUDIO'].includes(typeUpper) ||
-                        cleanLower.includes('prac') || cleanLower.includes('lab') || cleanLower.includes('workshop') || cleanLower.includes('studio')) {
-                        category = 'practical';
-                    } else if (['TUTL', 'TUTORIAL', 'TUT'].includes(typeUpper) ||
-                        cleanLower.includes('tut')) {
-                        category = 'tutorial';
-                    }
-
-                    const isLab = category === 'practical';
-                    const unitWeight = isLab ? 2 : 1;
-
-                    // Standard total semester classes calculation
-                    let totalClasses = category === 'lecture' ? (totalWeeks * 3) : (isLab ? (totalWeeks * 2) : totalWeeks);
-
-                    // If conducted classes from report already exceed baseline, scale totalClasses sensibly
-                    if (item.conducted > totalClasses) {
-                        totalClasses = Math.ceil(item.conducted * 1.25);
-                    }
-
-                    const newAcc = {
-                        id: 'acc_' + Date.now() + '_' + index,
-                        name: item.cleanName || item.detectedName,
-                        category: category,
-                        totalClasses: Math.max(category === 'lecture' ? 45 : (category === 'practical' ? 30 : 15), item.conducted),
-                        conductedSoFar: item.conducted,
-                        attendedSoFar: item.attended,
-                        missed: Math.max(0, item.conducted - item.attended),
-                        isFixed: true,
-                        unitWeight: unitWeight
-                    };
-
+            if (configuredNewAccounts && configuredNewAccounts.length > 0) {
+                configuredNewAccounts.forEach(newAcc => {
                     accounts.push(newAcc);
-                    item.matchedId = newAcc.id; // Map matchedId so that preview table links to the new account
                     createdCount++;
-                } else {
-                    const acc = accounts.find(a => String(a.id) === String(matchId));
+                });
+            }
+
+            parsedReportItems.forEach(item => {
+                if (item.matchedId && item.matchedId !== 'new' && item.matchedId !== 'ignore') {
+                    const acc = accounts.find(a => String(a.id) === String(item.matchedId));
                     if (acc) {
                         acc.conductedSoFar = item.conducted;
                         acc.attendedSoFar = item.attended;
@@ -3526,17 +4101,39 @@ EOB 8 6 75%"></textarea>
                 }
             });
 
+            save();
             updateAll();
             return { updatedCount, createdCount, total: parsedReportItems.length };
         }
 
         function updateCategoryCounts() {
-            const counts = { all: accounts.length, lecture: 0, tutorial: 0, practical: 0, other: 0 };
-            accounts.forEach(a => {
-                const cat = a.category || 'other';
-                if (counts[cat] !== undefined) counts[cat]++;
-                else counts.other++;
-            });
+            const counts = { all: 0, lecture: 0, tutorial: 0, practical: 0, other: 0 };
+
+            if (currentViewMode === 'combined') {
+                const courseGroups = new Map();
+                accounts.forEach(acc => {
+                    const baseName = getBaseCourseName(acc.name);
+                    if (!courseGroups.has(baseName)) {
+                        courseGroups.set(baseName, new Set());
+                    }
+                    courseGroups.get(baseName).add(acc.category || 'other');
+                });
+
+                counts.all = courseGroups.size;
+                courseGroups.forEach(catSet => {
+                    if (catSet.has('lecture')) counts.lecture++;
+                    if (catSet.has('tutorial')) counts.tutorial++;
+                    if (catSet.has('practical')) counts.practical++;
+                    if (catSet.has('other')) counts.other++;
+                });
+            } else {
+                counts.all = accounts.length;
+                accounts.forEach(a => {
+                    const cat = a.category || 'other';
+                    if (counts[cat] !== undefined) counts[cat]++;
+                    else counts.other++;
+                });
+            }
 
             document.getElementById('badge-count-all').innerText = counts.all;
             document.getElementById('badge-count-lecture').innerText = counts.lecture;
@@ -3547,7 +4144,7 @@ EOB 8 6 75%"></textarea>
         function updateAll() {
             save();
             updateCategoryCounts();
-            
+
             const container = document.getElementById('accountsContainer');
             container.innerHTML = '';
 
@@ -3568,22 +4165,7 @@ EOB 8 6 75%"></textarea>
                 return;
             }
 
-            // Filter accounts by active category tab
-            const filtered = activeFilter === 'all' 
-                ? accounts 
-                : accounts.filter(a => (a.category || 'other') === activeFilter);
-
-            if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">🔍</div>
-                        <h3>No modules found in this category</h3>
-                        <p>Switch categories or add a new subject to this category.</p>
-                    </div>
-                `;
-            }
-
-            // Calculate metrics across all accounts with exact precision
+            // Calculate global dashboard metrics across all individual accounts
             accounts.forEach(acc => {
                 const m = calcAccountMetrics(acc);
                 totalClassesSum += m.totalClasses;
@@ -3593,128 +4175,371 @@ EOB 8 6 75%"></textarea>
                 if (m.balance < 0 && !m.isRecoverable) defaulterCount++;
             });
 
-            // Group filtered accounts by category for structured visual display
-            const categoriesOrder = ['lecture', 'tutorial', 'practical', 'other'];
-            const categoryTitles = {
-                lecture: '📖 Lectures (Policy: 45 / 30 / 15 hrs)',
-                tutorial: '✏️ Tutorials (Policy: 15 hrs)',
-                practical: '🔬 Practicals (Policy: 15 hrs)',
-                other: '📦 Other Courses'
-            };
+            if (currentViewMode === 'combined') {
+                // --- DYNAMIC COMBINED COURSE AGGREGATION VIEW ---
+                const courseGroups = new Map();
+                accounts.forEach(acc => {
+                    const baseName = getBaseCourseName(acc.name);
+                    if (!courseGroups.has(baseName)) {
+                        courseGroups.set(baseName, {
+                            courseName: baseName,
+                            items: []
+                        });
+                    }
+                    courseGroups.get(baseName).items.push(acc);
+                });
 
-            categoriesOrder.forEach(catKey => {
-                const catItems = filtered.filter(a => (a.category || 'other') === catKey);
-                if (catItems.length === 0) return;
-
-                if (activeFilter === 'all') {
-                    const headerEl = document.createElement('div');
-                    headerEl.className = 'category-group-header';
-                    headerEl.innerHTML = `
-                        <span>${categoryTitles[catKey]}</span>
-                        <span class="category-pill-tag tag-${catKey}">${catItems.length} Module${catItems.length > 1 ? 's' : ''}</span>
-                    `;
-                    container.appendChild(headerEl);
+                let groups = Array.from(courseGroups.values());
+                if (activeFilter !== 'all') {
+                    groups = groups.filter(g => g.items.some(a => (a.category || 'other') === activeFilter));
                 }
 
-                catItems.forEach(acc => {
-                    const m = calcAccountMetrics(acc);
-                    const catTagClass = `tag-${acc.category || 'other'}`;
-                    let catLabel = (acc.category || 'other').toUpperCase();
-                    if (m.isTwoHourLab) {
-                        catLabel = `🔬 PRACTICAL (1 LAB/WK)`;
+                if (groups.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">🔍</div>
+                            <h3>No courses found in this category</h3>
+                            <p>Switch categories or add a new subject to this category.</p>
+                        </div>
+                    `;
+                }
+
+                const requiredRatio = parseFloat(document.getElementById('targetPct').value) || 0.80;
+                const reqPctNum = Math.round(requiredRatio * 100);
+
+                groups.forEach(g => {
+                    let combinedSemesterClasses = 0;
+                    let combinedMissed = 0;
+                    let combinedMaxBunksAllowed = 0;
+                    let combinedBalance = 0;
+                    let combinedConducted = 0;
+                    let combinedAttended = 0;
+                    let remainingLecturesSum = 0;
+                    let hasAnyReport = false;
+
+                    const componentBadges = [];
+                    const componentSteppers = [];
+
+                    g.items.forEach(acc => {
+                        const m = calcAccountMetrics(acc);
+                        combinedSemesterClasses += m.totalClasses;
+                        combinedMissed += m.missed;
+                        combinedMaxBunksAllowed += m.maxBunksAllowed;
+                        combinedBalance += m.balance;
+                        remainingLecturesSum += m.remainingLectures;
+
+                        const hasReport = (acc.conductedSoFar !== undefined && acc.conductedSoFar !== null && acc.conductedSoFar !== '');
+                        if (hasReport) {
+                            hasAnyReport = true;
+                            combinedConducted += parseFloat(acc.conductedSoFar) || 0;
+                            combinedAttended += (acc.attendedSoFar !== undefined ? parseFloat(acc.attendedSoFar) : Math.max(0, parseFloat(acc.conductedSoFar) - (parseFloat(acc.missed) || 0))) || 0;
+                        }
+
+                        const catIcon = acc.category === 'practical' ? '🔬' : (acc.category === 'tutorial' ? '✏️' : '📖');
+                        const typeLabel = acc.category === 'practical' ? 'Practical' : (acc.category === 'tutorial' ? 'Tutorial' : 'Lecture');
+
+                        const componentReportStr = (hasReport && acc.conductedSoFar > 0)
+                            ? `${m.sessionsAttended}/${m.sessionsConducted} ${m.unitPlural} (${((m.attended / m.conducted) * 100).toFixed(2)}%)`
+                            : `${m.sessionsTotal} ${m.unitPlural}`;
+
+                        componentBadges.push(`
+                            <div class="combined-component-pill" title="${escapeHtml(acc.name)}">
+                                <span class="category-pill-tag tag-${acc.category || 'other'}" style="padding: 2px 6px; font-size: 0.7rem;">${catIcon} ${typeLabel}</span>
+                                <span style="font-family: var(--font-mono); font-weight: 600; color: var(--text-main); font-size: 0.74rem;">${componentReportStr}</span>
+                                <button class="btn-icon" onclick="openEditModal('${acc.id}')" title="Edit ${typeLabel} Details" style="padding: 1px 5px; font-size: 0.65rem;">✏️</button>
+                            </div>
+                        `);
+
+                        componentSteppers.push(`
+                            <div class="stepper-group" style="padding: 3px 6px;">
+                                <span class="stepper-label" style="font-size: 0.68rem;">${catIcon} ${typeLabel}:</span>
+                                <button class="step-btn" onclick="adjustBunk('${acc.id}', -1)" title="Remove 1 ${m.unitSingular}">-</button>
+                                <button class="step-btn" onclick="adjustBunk('${acc.id}', 1)" title="Add 1 ${m.unitSingular}">+</button>
+                            </div>
+                        `);
+                    });
+
+                    const totalAttendedExpected = (hasAnyReport ? combinedAttended : Math.max(0, combinedSemesterClasses - combinedMissed)) + remainingLecturesSum;
+                    const termPct = combinedSemesterClasses > 0 ? ((totalAttendedExpected / combinedSemesterClasses) * 100).toFixed(2) : '100.00';
+
+                    // Official Combined Calculation: sum(attended) / sum(conducted) * 100
+                    const combinedPct = (hasAnyReport && combinedConducted > 0)
+                        ? ((combinedAttended / combinedConducted) * 100).toFixed(2)
+                        : null;
+
+                    const displayPct = combinedPct !== null ? combinedPct : termPct;
+                    const displayPctNum = parseFloat(displayPct) || 0;
+
+                    // Group Status & Recovery Advisory
+                    let statusClass = 'status-safe';
+                    let badgeClass = 'badge-safe';
+                    let statusText = 'SAFE';
+                    let strokeColor = 'var(--safe-color)';
+                    let recClass = 'rec-safe';
+                    let advisoryText = '';
+
+                    const minAttendedRequired = Math.ceil(Math.round(combinedSemesterClasses * requiredRatio * 10000) / 10000);
+                    const attendedSoFar = hasAnyReport ? combinedAttended : Math.max(0, combinedSemesterClasses - combinedMissed);
+                    const neededToHitTarget = Math.max(0, minAttendedRequired - attendedSoFar);
+                    const isRecoverable = neededToHitTarget <= remainingLecturesSum;
+
+                    if (combinedBalance < 0) {
+                        if (isRecoverable) {
+                            statusClass = 'status-recoverable';
+                            badgeClass = 'badge-recoverable';
+                            statusText = 'RECOVERABLE';
+                            strokeColor = 'var(--accent-cyan)';
+                            recClass = 'rec-recoverable';
+                            advisoryText = `💡 <strong>${Math.abs(combinedBalance)} hrs Deficit</strong>: Attend next <strong>${neededToHitTarget} hrs</strong> of ${remainingLecturesSum} hrs remaining to hit ${reqPctNum}%!`;
+                        } else {
+                            statusClass = 'status-defaulter';
+                            badgeClass = 'badge-defaulter';
+                            statusText = 'DEFAULTER';
+                            strokeColor = 'var(--danger-color)';
+                            recClass = 'rec-defaulter';
+                            advisoryText = `⛔ Cannot reach ${reqPctNum}%. Max possible term-end course attendance is <strong>${termPct}%</strong>.`;
+                        }
+                    } else if (combinedBalance <= 2) {
+                        statusClass = 'status-tight';
+                        badgeClass = 'badge-tight';
+                        statusText = 'TIGHT';
+                        strokeColor = 'var(--warn-color)';
+                        recClass = 'rec-tight';
+                        advisoryText = `⚠️ <strong>Low Margin</strong>: Only <strong>${combinedBalance} hrs</strong> safe bunk buffer left across all components before falling below ${reqPctNum}%.`;
+                    } else {
+                        advisoryText = `🟢 <strong>Safe Margin</strong>: You have <strong>+${combinedBalance} hrs</strong> safe bunk buffer across all components to maintain ${reqPctNum}%.`;
                     }
 
-                    const reportPillHtml = m.reportPct !== null
-                        ? `<span class="report-pill" title="Weekly attendance report standing">📋 Report: ${m.sessionsAttended}/${m.sessionsConducted} ${m.unitPlural} (${m.reportPct}%)</span>`
-                        : '';
+                    const gaugeMax = combinedMaxBunksAllowed > 0 ? combinedMaxBunksAllowed : 1;
+                    const spentPct = Math.min(100, Math.round((combinedMissed / gaugeMax) * 100));
+                    const circumference = 2 * Math.PI * 82; // High-precision 200x200 viewBox radius 82
+                    const strokeDashoffset = circumference - (Math.min(100, displayPctNum) / 100) * circumference;
 
                     const card = document.createElement('div');
-                    card.className = `account-card ${m.statusClass}`;
-                    card.id = `acc-${acc.id}`;
+                    card.className = `account-card ${statusClass}`;
+                    card.id = `course-${g.courseName.replace(/\s+/g, '-')}`;
                     card.innerHTML = `
                         <div class="card-main">
                             <div class="card-title-row">
                                 <div class="title-left">
-                                    <h3 class="acc-name">${escapeHtml(acc.name)}</h3>
-                                    <span class="category-pill-tag ${catTagClass}">${catLabel}</span>
-                                    ${reportPillHtml}
+                                    <h3 class="acc-name">${escapeHtml(g.courseName)}</h3>
+                                    <span class="category-pill-tag tag-other" style="background: rgba(99, 102, 241, 0.12); color: var(--badge-brand-text); border: 1px solid rgba(99, 102, 241, 0.25);">
+                                        👥 Combined (${g.items.length} ${g.items.length === 1 ? 'type' : 'types'})
+                                    </span>
+                                    ${combinedPct !== null ? `<span class="report-pill" title="Official combined standing from report">📋 Official Report: ${combinedAttended}/${combinedConducted} hrs (${combinedPct}%)</span>` : ''}
                                 </div>
-                                <span class="status-badge ${m.badgeClass}">${m.statusText}</span>
+                                <span class="status-badge ${badgeClass}">${statusText}</span>
+                            </div>
+
+                            <!-- Component Breakdown Pills -->
+                            <div class="combined-components-list">
+                                ${componentBadges.join('')}
                             </div>
 
                             <div class="card-stats">
                                 <div class="stat-item">
                                     <span class="lbl">Semester Total</span>
-                                    <span class="num stat-classes-num">${m.sessionsTotal} ${m.unitPlural}</span>
+                                    <span class="num stat-classes-num">${combinedSemesterClasses} hrs</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="lbl">Bunks Allowed</span>
-                                    <span class="num stat-allowed-num">${m.sessionsAllowed} ${m.unitPlural}</span>
+                                    <span class="num stat-allowed-num">${combinedMaxBunksAllowed} hrs</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="lbl">Bunks Spent</span>
-                                    <span class="num stat-spent-num" style="color: ${m.missed > m.maxBunksAllowed ? 'var(--danger-color)' : 'var(--heading-color)'}">
-                                        ${m.sessionsMissed} ${m.unitPlural}
+                                    <span class="num stat-spent-num" style="color: ${combinedMissed > combinedMaxBunksAllowed ? 'var(--danger-color)' : 'var(--heading-color)'}">
+                                        ${combinedMissed} hrs
                                     </span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="lbl">Safe Balance</span>
-                                    <span class="num stat-balance-num" style="color: ${m.strokeColor}">
-                                        ${m.sessionsBalance >= 0 ? '+' : ''}${m.sessionsBalance} ${m.unitPlural}
+                                    <span class="num stat-balance-num" style="color: ${strokeColor}">
+                                        ${combinedBalance >= 0 ? '+' : ''}${combinedBalance} hrs
                                     </span>
                                 </div>
                             </div>
 
                             <div class="progress-box">
                                 <div class="progress-info">
-                                    <span>Bunk Safety Margin</span>
-                                    <span class="prog-usage-label">${m.sessionsMissed} / ${m.sessionsAllowed} ${m.unitPlural} Max</span>
+                                    <span>Course Bunk Usage</span>
+                                    <span class="prog-usage-label">${combinedMissed} / ${combinedMaxBunksAllowed} hrs Max</span>
                                 </div>
                                 <div class="progress-track">
-                                    <div class="progress-fill" style="width: ${m.spentPct}%; background-color: ${m.strokeColor};"></div>
+                                    <div class="progress-fill" style="width: ${spentPct}%; background-color: ${strokeColor};"></div>
                                 </div>
                             </div>
 
-                            <div class="recovery-banner ${m.recClass}">
-                                ${m.advisoryText}
+                            <div class="recovery-banner ${recClass}">
+                                ${advisoryText}
                             </div>
 
                             <div class="card-actions">
-                                <div class="action-left">
-                                    <div class="stepper-group">
-                                        <span class="stepper-label">Record Bunk</span>
-                                        <button class="step-btn" onclick="adjustBunk('${acc.id}', -1)" title="Remove 1 ${m.unitSingular}">-</button>
-                                        <button class="step-btn" onclick="adjustBunk('${acc.id}', 1)" title="Add 1 ${m.unitSingular}">+</button>
+                                <div class="action-left" style="flex-wrap: wrap; gap: 8px;">
+                                    <div style="font-size: 0.7rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase;">Record Bunk:</div>
+                                    <div class="combined-steppers-grid">
+                                        ${componentSteppers.join('')}
                                     </div>
-                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-top: 2px;">⚡ Step: 1 ${m.unitSingular}</div>
-                                </div>
-
-                                <div style="display: flex; align-items: center; gap: 8px;">
-                                    <button class="btn-icon" onclick="openEditModal('${acc.id}')" title="Edit Module Details">✏️ Edit</button>
-                                    <button class="btn-icon btn-delete" onclick="deleteAccount('${acc.id}')" title="Delete Module">🗑️</button>
                                 </div>
                             </div>
                         </div>
 
                         <div class="card-gauge-side">
                             <div class="radial-gauge">
-                                <svg viewBox="0 0 90 90">
-                                    <circle class="gauge-bg" cx="45" cy="45" r="38" />
-                                    <circle class="gauge-fill" cx="45" cy="45" r="38" 
-                                            stroke="${m.strokeColor}"
-                                            stroke-dasharray="238.76" 
-                                            stroke-dashoffset="${m.strokeDashoffset}" />
+                                <svg viewBox="0 0 200 200" shape-rendering="geometricPrecision">
+                                    <circle class="gauge-bg" cx="100" cy="100" r="82" />
+                                    <circle class="gauge-fill" cx="100" cy="100" r="82" 
+                                            stroke="${strokeColor}"
+                                            stroke-dasharray="515.22" 
+                                            stroke-dashoffset="${strokeDashoffset}" />
                                 </svg>
                                 <div class="gauge-center">
-                                    <span class="gauge-pct">${m.currentPct}%</span>
-                                    <span class="gauge-subtext">${m.reportPct !== null ? 'Report %' : 'Standing'}</span>
+                                    ${renderGaugePctHtml(displayPct)}
+                                    <span class="gauge-subtext">${combinedPct !== null ? 'Combined' : 'Standing'}</span>
                                 </div>
                             </div>
                         </div>
                     `;
                     container.appendChild(card);
                 });
-            });
+
+            } else {
+                // --- INDIVIDUAL BY-TYPE VIEW (ORIGINAL ROWS) ---
+                const filtered = activeFilter === 'all'
+                    ? accounts
+                    : accounts.filter(a => (a.category || 'other') === activeFilter);
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">🔍</div>
+                            <h3>No modules found in this category</h3>
+                            <p>Switch categories or add a new subject to this category.</p>
+                        </div>
+                    `;
+                }
+
+                const categoriesOrder = ['lecture', 'tutorial', 'practical', 'other'];
+                const categoryTitles = {
+                    lecture: '📖 Lectures (Policy: 45 / 30 / 15 hrs)',
+                    tutorial: '✏️ Tutorials (Policy: 15 hrs)',
+                    practical: '🔬 Practicals (Policy: 15 hrs)',
+                    other: '📦 Other Courses'
+                };
+
+                categoriesOrder.forEach(catKey => {
+                    const catItems = filtered.filter(a => (a.category || 'other') === catKey);
+                    if (catItems.length === 0) return;
+
+                    if (activeFilter === 'all') {
+                        const headerEl = document.createElement('div');
+                        headerEl.className = 'category-group-header';
+                        headerEl.innerHTML = `
+                            <span>${categoryTitles[catKey]}</span>
+                            <span class="category-pill-tag tag-${catKey}">${catItems.length} Module${catItems.length > 1 ? 's' : ''}</span>
+                        `;
+                        container.appendChild(headerEl);
+                    }
+
+                    catItems.forEach(acc => {
+                        const m = calcAccountMetrics(acc);
+                        const catTagClass = `tag-${acc.category || 'other'}`;
+                        let catLabel = (acc.category || 'other').toUpperCase();
+                        if (m.isTwoHourLab) {
+                            catLabel = `🔬 PRACTICAL (1 LAB/WK)`;
+                        }
+
+                        const reportPillHtml = m.reportPct !== null
+                            ? `<span class="report-pill" title="Weekly attendance report standing">📋 Report: ${m.sessionsAttended}/${m.sessionsConducted} ${m.unitPlural} (${m.reportPct}%)</span>`
+                            : '';
+
+                        const card = document.createElement('div');
+                        card.className = `account-card ${m.statusClass}`;
+                        card.id = `acc-${acc.id}`;
+                        card.innerHTML = `
+                            <div class="card-main">
+                                <div class="card-title-row">
+                                    <div class="title-left">
+                                        <h3 class="acc-name">${escapeHtml(acc.name)}</h3>
+                                        <span class="category-pill-tag ${catTagClass}">${catLabel}</span>
+                                        ${reportPillHtml}
+                                    </div>
+                                    <span class="status-badge ${m.badgeClass}">${m.statusText}</span>
+                                </div>
+
+                                <div class="card-stats">
+                                    <div class="stat-item">
+                                        <span class="lbl">Semester Total</span>
+                                        <span class="num stat-classes-num">${m.sessionsTotal} ${m.unitPlural}</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="lbl">Bunks Allowed</span>
+                                        <span class="num stat-allowed-num">${m.sessionsAllowed} ${m.unitPlural}</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="lbl">Bunks Spent</span>
+                                        <span class="num stat-spent-num" style="color: ${m.missed > m.maxBunksAllowed ? 'var(--danger-color)' : 'var(--heading-color)'}">
+                                            ${m.sessionsMissed} ${m.unitPlural}
+                                        </span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="lbl">Safe Balance</span>
+                                        <span class="num stat-balance-num" style="color: ${m.strokeColor}">
+                                            ${m.sessionsBalance >= 0 ? '+' : ''}${m.sessionsBalance} ${m.unitPlural}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="progress-box">
+                                    <div class="progress-info">
+                                        <span>Bunk Safety Margin</span>
+                                        <span class="prog-usage-label">${m.sessionsMissed} / ${m.sessionsAllowed} ${m.unitPlural} Max</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-fill" style="width: ${m.spentPct}%; background-color: ${m.strokeColor};"></div>
+                                    </div>
+                                </div>
+
+                                <div class="recovery-banner ${m.recClass}">
+                                    ${m.advisoryText}
+                                </div>
+
+                                <div class="card-actions">
+                                    <div class="action-left">
+                                        <div class="stepper-group">
+                                            <span class="stepper-label">Record Bunk</span>
+                                            <button class="step-btn" onclick="adjustBunk('${acc.id}', -1)" title="Remove 1 ${m.unitSingular}">-</button>
+                                            <button class="step-btn" onclick="adjustBunk('${acc.id}', 1)" title="Add 1 ${m.unitSingular}">+</button>
+                                        </div>
+                                        <div style="font-size: 0.68rem; color: var(--text-dim); margin-top: 2px;">⚡ Step: 1 ${m.unitSingular}</div>
+                                    </div>
+
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <button class="btn-icon" onclick="openEditModal('${acc.id}')" title="Edit Module Details">✏️ Edit</button>
+                                        <button class="btn-icon btn-delete" onclick="deleteAccount('${acc.id}')" title="Delete Module">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-gauge-side">
+                                <div class="radial-gauge">
+                                    <svg viewBox="0 0 200 200" shape-rendering="geometricPrecision">
+                                        <circle class="gauge-bg" cx="100" cy="100" r="82" />
+                                        <circle class="gauge-fill" cx="100" cy="100" r="82" 
+                                                stroke="${m.strokeColor}"
+                                                stroke-dasharray="515.22" 
+                                                stroke-dashoffset="${m.strokeDashoffset}" />
+                                    </svg>
+                                    <div class="gauge-center">
+                                        ${renderGaugePctHtml(m.currentPct)}
+                                        <span class="gauge-subtext">${m.reportPct !== null ? 'Report %' : 'Standing'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                });
+            }
 
             const overallPct = totalClassesSum > 0 ? Math.round((totalAttendedSum / totalClassesSum) * 100) : 100;
             updateDashboard(overallPct, netBalanceSum, defaulterCount, accounts.length, totalClassesSum);
@@ -3722,7 +4547,7 @@ EOB 8 6 75%"></textarea>
 
         function updateDashboard(overallPct, totalBalance, riskCount, totalSubjects, totalLecturesSum) {
             document.getElementById('dashOverallPct').innerHTML = `${overallPct}<small>%</small>`;
-            
+
             const balEl = document.getElementById('dashTotalBalance');
             balEl.innerText = totalBalance;
             balEl.style.color = totalBalance < 0 ? 'var(--danger-color)' : (totalBalance <= 3 ? 'var(--warn-color)' : 'var(--safe-color)');
@@ -3756,22 +4581,22 @@ EOB 8 6 75%"></textarea>
                 onSemesterDurationChange();
                 document.getElementById('targetPct').value = "0.80";
             }
-            
-            setupDropzoneEvents();
-            updateAll();
 
-            // Fast Page Entrance Animation
+            setupDropzoneEvents();
+            setViewMode(currentViewMode, false);
+
+            // Silky Smooth Page Entrance Animation
             if (window.gsap) {
-                gsap.from('.app-header', { y: -14, opacity: 0, duration: 0.55, ease: "power3.out" });
-                gsap.from('.dash-card', { y: 12, opacity: 0, duration: 0.45, stagger: 0.05, ease: "power3.out", delay: 0.12 });
-                gsap.from('.panel', { y: 16, opacity: 0, duration: 0.5, stagger: 0.1, ease: "power3.out", delay: 0.25 });
-                gsap.from('.app-footer', { y: 10, opacity: 0, duration: 0.45, ease: "power3.out", delay: 0.45 });
+                gsap.from('.app-header', { y: -12, opacity: 0, duration: 0.45, ease: "power2.out" });
+                gsap.from('.dash-card', { y: 10, opacity: 0, duration: 0.38, stagger: 0.04, ease: "power2.out", delay: 0.06 });
+                gsap.from('.panel', { y: 14, opacity: 0, duration: 0.45, stagger: 0.08, ease: "power2.out", delay: 0.15 });
+                gsap.from('.policy-banner, .app-footer', { y: 10, opacity: 0, duration: 0.4, ease: "power2.out", delay: 0.28 });
             }
 
             const d = new Date();
             document.getElementById('clock').innerText = (d.getMonth() + 1).toString().padStart(2, '0') + '/' + d.getFullYear();
         };
     </script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e23258638257410085d318addd1fab5e"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
+
 </html>

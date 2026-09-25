@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>Bunk Bank | NMIMS MBA TECH CE Ledger</title>
+    <title>Bunk Bank | Attendance &amp; Bunk Ledger</title>
 
     <!-- Modern Typography & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -332,46 +332,43 @@
             flex-wrap: wrap;
         }
 
-        /* SLEEK CUSTOM PILL SEGMENTED THEME SELECTOR BAR (NO RECTANGLE BOXES!) */
-        .theme-pill-bar {
+        /* SLEEK PROFESSIONAL THEME DROPDOWN SELECTOR */
+        .theme-select-wrap {
+            position: relative;
             display: inline-flex;
             align-items: center;
-            gap: 3px;
-            background: var(--bg-subtle);
-            border: 1px solid var(--border-glass);
-            padding: 3px;
-            border-radius: 30px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
-        .theme-pill-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.76rem;
+        .theme-select-control {
+            appearance: none;
+            -webkit-appearance: none;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            padding: 7px 32px 7px 16px;
+            border-radius: 9999px;
+            font-size: 0.78rem;
             font-weight: 700;
             font-family: var(--font-body);
             cursor: pointer;
-            transition: all 0.2s var(--ease-apple);
-            white-space: nowrap;
-            user-select: none;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.25s var(--ease-apple);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 11px center;
         }
 
-        .theme-pill-btn:hover {
-            color: var(--heading-color);
-            background: rgba(255, 255, 255, 0.06);
+        .theme-select-control:hover,
+        .theme-select-control:focus {
+            border-color: var(--accent-primary);
+            background-color: var(--bg-card-hover);
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
         }
 
-        .theme-pill-btn.active {
-            background: var(--accent-primary);
-            color: #ffffff;
-            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);
-        }
-
-        [data-theme="apex"] .theme-pill-btn.active {
-            box-shadow: 0 2px 10px rgba(255, 0, 60, 0.5);
+        .theme-select-control option {
+            background: var(--bg-card);
+            color: var(--text-main);
         }
 
         .date-chip {
@@ -1809,20 +1806,18 @@
         <header class="app-header">
             <div class="header-top">
                 <div class="brand-badge">
-                    🎓 NMIMS MBA TECH CE • Solvency Ledger
+                    🎓 Attendance &amp; Bunk Tracker
                 </div>
 
                 <div class="header-right-controls">
-                    <!-- Sleek Custom Pill Segmented Theme Switcher -->
-                    <div class="theme-pill-bar">
-                        <button type="button" class="theme-pill-btn active" data-theme-id="apex" onclick="setTheme('apex')"
-                            title="Apex GT Motorsport">🏎️ Apex GT</button>
-                        <button type="button" class="theme-pill-btn" data-theme-id="black"
-                            onclick="setTheme('black')" title="Pure OLED Black">⬛ Black</button>
-                        <button type="button" class="theme-pill-btn" data-theme-id="midnight"
-                            onclick="setTheme('midnight')" title="Midnight Luxe">🌌 Midnight</button>
-                        <button type="button" class="theme-pill-btn" data-theme-id="white" onclick="setTheme('white')"
-                            title="Clean White">☀️ White</button>
+                    <!-- Sleek Custom Theme Dropdown -->
+                    <div class="theme-select-wrap">
+                        <select id="themeSelect" class="theme-select-control" onchange="setTheme(this.value)" aria-label="Select Theme">
+                            <option value="apex" selected>🏎️ Apex GT</option>
+                            <option value="black">⬛ Pure Black</option>
+                            <option value="midnight">🌌 Midnight</option>
+                            <option value="white">☀️ Clean White</option>
+                        </select>
                     </div>
                     <div class="date-chip" id="clock">09/2026</div>
                 </div>
@@ -1830,7 +1825,7 @@
 
             <h1 class="app-title">Bunk Bank</h1>
             <p class="app-subtitle">
-                <span>Official Course Hours Policy • <strong>80% Mandatory Solvency</strong></span>
+                <span>Course Attendance Tracker • <strong>80% Minimum Requirement</strong></span>
             </p>
 
             <div class="policy-banner">
@@ -1838,14 +1833,14 @@
                     <path
                         d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
                 </svg>
-                <span><strong>NMIMS Syllabus Policy:</strong> 15-week academic term standard. 3/wk subjects = 45 total
-                    lectures (9 bunks allowed), 2/wk = 30 lectures (6 bunks), 1/wk = 15 sessions (3 bunks).</span>
+                <span><strong>Academic Term Policy:</strong> Standard semester schedule calculation. 3/wk subjects = 45 total
+                    lectures (9 bunks allowed @ 80%), 2/wk = 30 lectures (6 bunks), 1/wk = 15 sessions (3 bunks).</span>
             </div>
 
             <!-- Dashboard Summary Metrics -->
             <div class="dash-grid">
                 <div class="dash-card">
-                    <div class="dash-label">Overall Solvency</div>
+                    <div class="dash-label">Overall Attendance</div>
                     <div class="dash-val" id="dashOverallPct">100<small>%</small></div>
                 </div>
                 <div class="dash-card">
@@ -2299,17 +2294,18 @@ EOB 8 6 75%"></textarea>
             localStorage.setItem('bunkBank_nmims_v5', JSON.stringify(accounts));
         }
 
-        // Theme Manager
+        // Theme Manager (Apex GT is default)
         function setTheme(themeName) {
-            if (!['black', 'midnight', 'white', 'apex'].includes(themeName)) {
+            if (!['apex', 'black', 'midnight', 'white'].includes(themeName)) {
                 themeName = 'apex';
             }
             document.documentElement.setAttribute('data-theme', themeName);
             localStorage.setItem('bunkBank_theme', themeName);
 
-            document.querySelectorAll('.theme-pill-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-theme-id') === themeName);
-            });
+            const themeSelect = document.getElementById('themeSelect');
+            if (themeSelect && themeSelect.value !== themeName) {
+                themeSelect.value = themeName;
+            }
         }
 
         function save() {
@@ -2606,9 +2602,9 @@ EOB 8 6 75%"></textarea>
                 statusText = 'TIGHT';
                 strokeColor = 'var(--warn-color)';
                 recClass = 'rec-tight';
-                advisoryText = `⚠️ <strong>Tight Solvency</strong>: Only <strong>${sessionsBalance} ${sessionsBalance === 1 ? unitSingular : unitPlural}</strong> left to bunk before falling below ${reqPctNum}%.`;
+                advisoryText = `⚠️ <strong>Low Margin</strong>: Only <strong>${sessionsBalance} ${sessionsBalance === 1 ? unitSingular : unitPlural}</strong> left to bunk before falling below ${reqPctNum}%.`;
             } else {
-                advisoryText = `🟢 <strong>Solvent & Safe</strong>: You can safely miss up to <strong>${sessionsBalance} ${sessionsBalance === 1 ? unitSingular : unitPlural}</strong> and maintain ${reqPctNum}%.`;
+                advisoryText = `🟢 <strong>Safe Margin</strong>: You can safely miss up to <strong>${sessionsBalance} ${sessionsBalance === 1 ? unitSingular : unitPlural}</strong> and maintain ${reqPctNum}%.`;
             }
 
             const gaugeMax = maxBunksAllowed > 0 ? maxBunksAllowed : 1;
@@ -3165,16 +3161,18 @@ EOB 8 6 75%"></textarea>
             parseAndDisplayReportText(text);
         }
 
-        // Clean raw course names from NMIMS/SVKM report tables
+        // Clean raw course names from university/college report tables (any course/program)
         function cleanReportCourseName(raw) {
             let s = raw;
-            // Strip S.No at start
-            s = s.replace(/^\s*\d{1,2}\s+/, '');
-            // Strip program / division tokens
-            s = s.replace(/\b(MBA\s*TECH|MBATECH|DIV\s+[A-Z0-9]+|BATCH\s+[A-Z0-9]+)\b.*$/i, '');
-            // Strip division codes like CALCULUST2, PHYSICSP2, BIOU2, DESIT2, etc.
+            // Strip S.No at start (e.g. "1 ", "1. ", "01 - ")
+            s = s.replace(/^\s*\d{1,2}[\.\s\-]+/, '');
+            // Strip common program names, degree codes, division, batch and semester tokens
+            s = s.replace(/\b(MBA\s*TECH|MBATECH|B\.?\s*TECH|M\.?\s*TECH|BBA|B\.?\s*COM|B\.?\s*SC|MBA|BALLB|BBALLB|LLB|PHARM|PHARM\.?D|MCA|BCA|DIV\s+[A-Z0-9]+|BATCH\s+[A-Z0-9]+|SEM\s*[0-9IVX]+|SEC\s+[A-Z0-9]+)\b.*$/i, '');
+            // Strip division codes / section suffixes like CALCULUST2, PHYSICSP2, BIOU2, CS301T, etc.
             s = s.replace(/\b[A-Z0-9]+[TPU]\d+\b.*$/i, '');
-            s = s.replace(/\s+/g, ' ').trim();
+            // Strip trailing lecture type indicators like (THEO), (PRAC), THEO, PRAC, TUTL, LAB, etc.
+            s = s.replace(/\s*[\(\[]?\b(THEO|PRAC|TUTL|STUD|LAB|THEORY|PRACTICAL|TUTORIAL)\b[\)\]]?\s*$/i, '');
+            s = s.replace(/[\-_–—]+$/, '').replace(/\s+/g, ' ').trim();
             
             const u = s.toUpperCase();
             if (u.includes('GRAPHICS') || u.includes('DESIGN') || u.includes('EGD')) return 'Engineering Graphics & Design';
@@ -3188,21 +3186,33 @@ EOB 8 6 75%"></textarea>
             if (u.includes('ENVIRONMENTAL') || u.includes('STUDIES') || u.includes('ES')) return 'Environmental Studies';
             if (u.includes('BIOLOGY') || u.includes('EOB')) return 'Elements of Biology';
             
-            return s.length > 3 ? s : raw;
+            // Format generic course name: convert ALL-CAPS names to readable Title Case
+            if (s.length > 2) {
+                if (s === s.toUpperCase()) {
+                    s = s.toLowerCase().replace(/(?:^|\s|\/|\-)\w/g, match => match.toUpperCase());
+                }
+                return s;
+            }
+            return raw.trim();
         }
 
         // Match detected report item to configured subject accounts
         function matchReportItemToAccount(name, ltype, accountsList) {
             let targetCategory = 'lecture';
             const upperType = (ltype || '').toUpperCase();
-            if (['PRAC', 'PRACTICAL', 'LAB'].includes(upperType)) targetCategory = 'practical';
-            else if (['TUTL', 'TUTORIAL', 'TUT'].includes(upperType)) targetCategory = 'tutorial';
+            const nameUpper = (name || '').toUpperCase();
 
-            const nameClean = name.toUpperCase();
+            if (['PRAC', 'PRACTICAL', 'LAB', 'WORKSHOP', 'STUDIO'].includes(upperType) || nameUpper.includes('LAB') || nameUpper.includes('PRAC') || nameUpper.includes('PRACTICAL')) {
+                targetCategory = 'practical';
+            } else if (['TUTL', 'TUTORIAL', 'TUT'].includes(upperType) || nameUpper.includes('TUT') || nameUpper.includes('TUTORIAL')) {
+                targetCategory = 'tutorial';
+            }
 
-            // Semantic alias map for NMIMS MBA Tech subjects
+            const nameClean = nameUpper.replace(/\s*[\(\[]?\b(THEO|PRAC|TUTL|STUD|LAB|THEORY|PRACTICAL|TUTORIAL)\b[\)\]]?\s*/gi, '').trim();
+
+            // Semantic alias map for common subjects
             const aliases = {
-                'Calculus': ['CALCULUS', 'CALC', 'MATH'],
+                'Calculus': ['CALCULUS', 'CALC', 'MATH', 'MATHEMATICS'],
                 'CTPS': ['COMPUTATIONAL', 'CTPS', 'PROBLEM SOLV'],
                 'Physics': ['PHYSICS', 'PHYSIC'],
                 'EOB': ['BIOLOGY', 'BIO', 'EOB'],
@@ -3234,7 +3244,7 @@ EOB 8 6 75%"></textarea>
                 const accCat = acc.category || 'lecture';
                 if (accCat === targetCategory) {
                     const accNameUpper = acc.name.toUpperCase();
-                    if (accNameUpper.includes(nameClean) || nameClean.includes(accNameUpper)) {
+                    if (accNameUpper === nameClean || accNameUpper.includes(nameClean) || nameClean.includes(accNameUpper)) {
                         return acc.id;
                     }
                 }
@@ -3376,12 +3386,19 @@ EOB 8 6 75%"></textarea>
             // Show Sleek Upload Successful state
             const successSummary = document.getElementById('reportSuccessSummary');
             if (successSummary) {
-                successSummary.innerHTML = `Successfully synced <strong>${syncStats.updatedCount}</strong> subjects from your report! Your safe bunk allowances and term projections are refreshed.`;
+                const totalCount = syncStats.updatedCount + syncStats.createdCount;
+                let msg = `Successfully synced <strong>${totalCount}</strong> subjects from your report!`;
+                if (syncStats.createdCount > 0) {
+                    msg += ` (${syncStats.createdCount} new ${syncStats.createdCount === 1 ? 'subject added' : 'subjects added'})`;
+                }
+                msg += ` Your safe bunk allowances and term projections are refreshed.`;
+                successSummary.innerHTML = msg;
             }
             const successSec = document.getElementById('reportSuccessSection');
             if (successSec) successSec.style.display = 'flex';
 
-            showToast(`✨ Attendance Report Synced Successfully! (${syncStats.updatedCount} subjects updated) 📊`);
+            const totalCount = syncStats.updatedCount + syncStats.createdCount;
+            showToast(`✨ Attendance Report Synced Successfully! (${totalCount} subjects synced) 📊`);
         }
 
         function renderReportPreviewTable() {
@@ -3449,33 +3466,59 @@ EOB 8 6 75%"></textarea>
             let updatedCount = 0;
             let createdCount = 0;
 
+            const semLen = parseFloat(document.getElementById('semLen').value) || 15;
+            const semUnit = parseFloat(document.getElementById('semUnit').value) || 1;
+            const totalWeeks = Math.max(1, Math.round(semLen * semUnit));
+
             parsedReportItems.forEach((item, index) => {
                 const matchId = item.matchedId;
                 if (matchId === 'ignore') return;
 
                 if (matchId === 'new') {
                     let category = 'lecture';
-                    const lower = item.detectedName.toLowerCase();
-                    if (lower.includes('tut')) category = 'tutorial';
-                    else if (lower.includes('prac') || lower.includes('lab')) category = 'practical';
+                    const typeUpper = (item.type || '').toUpperCase();
+                    const cleanLower = (item.cleanName || item.detectedName || '').toLowerCase();
 
-                    accounts.push({
+                    if (['PRAC', 'PRACTICAL', 'LAB', 'WORKSHOP', 'STUDIO'].includes(typeUpper) ||
+                        cleanLower.includes('prac') || cleanLower.includes('lab') || cleanLower.includes('workshop') || cleanLower.includes('studio')) {
+                        category = 'practical';
+                    } else if (['TUTL', 'TUTORIAL', 'TUT'].includes(typeUpper) ||
+                        cleanLower.includes('tut')) {
+                        category = 'tutorial';
+                    }
+
+                    const isLab = category === 'practical';
+                    const unitWeight = isLab ? 2 : 1;
+
+                    // Standard total semester classes calculation
+                    let totalClasses = category === 'lecture' ? (totalWeeks * 3) : (isLab ? (totalWeeks * 2) : totalWeeks);
+
+                    // If conducted classes from report already exceed baseline, scale totalClasses sensibly
+                    if (item.conducted > totalClasses) {
+                        totalClasses = Math.ceil(item.conducted * 1.25);
+                    }
+
+                    const newAcc = {
                         id: 'acc_' + Date.now() + '_' + index,
                         name: item.cleanName || item.detectedName,
                         category: category,
-                        totalClasses: category === 'lecture' ? 45 : (category === 'practical' ? 30 : 15),
+                        totalClasses: Math.max(category === 'lecture' ? 45 : (category === 'practical' ? 30 : 15), item.conducted),
                         conductedSoFar: item.conducted,
                         attendedSoFar: item.attended,
                         missed: Math.max(0, item.conducted - item.attended),
                         isFixed: true,
-                        unitWeight: category === 'practical' ? 2 : 1
-                    });
+                        unitWeight: unitWeight
+                    };
+
+                    accounts.push(newAcc);
+                    item.matchedId = newAcc.id; // Map matchedId so that preview table links to the new account
                     createdCount++;
                 } else {
                     const acc = accounts.find(a => String(a.id) === String(matchId));
                     if (acc) {
                         acc.conductedSoFar = item.conducted;
                         acc.attendedSoFar = item.attended;
+                        acc.totalClasses = Math.max(acc.totalClasses, item.conducted);
                         acc.missed = Math.max(0, item.conducted - item.attended);
                         acc.isFixed = true;
                         updatedCount++;
@@ -3624,7 +3667,7 @@ EOB 8 6 75%"></textarea>
 
                             <div class="progress-box">
                                 <div class="progress-info">
-                                    <span>Bunks Solvency Meter</span>
+                                    <span>Bunk Safety Margin</span>
                                     <span class="prog-usage-label">${m.sessionsMissed} / ${m.sessionsAllowed} ${m.unitPlural} Max</span>
                                 </div>
                                 <div class="progress-track">
@@ -3696,7 +3739,7 @@ EOB 8 6 75%"></textarea>
         }
 
         window.onload = () => {
-            // Restore Theme Preference (Default is Pure Black)
+            // Restore Theme Preference (Default is Apex GT)
             const savedTheme = localStorage.getItem('bunkBank_theme') || 'apex';
             setTheme(savedTheme);
 
